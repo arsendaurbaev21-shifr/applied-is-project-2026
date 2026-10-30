@@ -1,0 +1,1 @@
+{"version":"2.0.0","tasks":[{"label":"QazCargo Start","type":"shell","command":".\\START.bat","problemMatcher":[]},{"label":"QazCargo SQL integration tests","type":"shell","command":".\\.venv\\Scripts\\python.exe -m pytest tests -v","problemMatcher":[]}]}

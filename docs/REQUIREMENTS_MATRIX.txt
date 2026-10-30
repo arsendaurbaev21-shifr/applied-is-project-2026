@@ -1,0 +1,53 @@
+QAZCARGO — ТАЛАПТАР ЖӘНЕ ІСКЕ АСЫРУ КАРТАСЫ
+
+Талап көзі: пайдаланушы берген QazCargo_Codex_Full_Prompt.txt толық оқылды.
+Бұрынғы QazCargo_v2_Full.zip үлгі ретінде тексерілді. Дайын ескі папка көшіріліп тапсырылмады: жаңа backend және web модульдері жасалды. Сәйкес SQL DDL үлгісі аудиттен өткізіліп, уақыт белдеуі, тарих/байланыс тұтастығы, VIEW және индекстері толықтырылды. Жүк көлігі суреті берілген архивтен пайдаланылды.
+
+1–3. Мақсат, толық жоба, технологиялар
+backend/app.py, db.py, portal.py; web; database; .env.example; requirements.txt.
+Flask/Waitress → pyodbc → Microsoft SQL Server. Fake API/SQLite/browser дерек сақтау жоқ.
+
+4. Басты бет және дизайн
+web/index.html, styles.css, public.js, images. SQL бағыт/тариф калькуляторы және кабинетке таңдау жеткізу.
+
+5. Рөлдер
+web/admin.html және customer.html; backend/auth.py, own_order. Әкімші CRUD және клиенттің тек өз дерегі.
+
+6–7. 17 кесте және байланыстар
+database/01_create_database.sql; 17 кесте, 21 FK, CHECK/UNIQUE/DEFAULT, 10 trigger, 2 procedure, функция және view.
+docs/schema.json нақты орнатылған SQL метадерегі; Word-та барлық өріс пен байланыс түсіндіріледі.
+
+8. Бизнес ережелері
+backend/service.py, portal.py, SQL trigger/procedure; Decimal ақша, тарихи quote, мәртебе, сыйымдылық, уақыт қақтығысы, артық төлем, транзакциялар.
+
+9. Құжаттар және баспа
+backend/documents.py, web/office.js, print.js, print.css. Файл байттары SQL VARBINARY(MAX). Preview пішіміне қарай; Office түпнұсқа жүктеледі; 20 МБ шек.
+
+10. Есеп, іздеу, жаңару
+web/orders.js, office.js, workspace.js; сервердегі scoped filters, толық сүзілген жолдар, сомалар, CSV, A4. Ашық форма автоматты жаңаруда өшірілмейді.
+
+11. Тілдер, мәзір, уақыт
+web/i18n.js: 272 үштілді кілт. Құрама әкімші мәзірі, әрекет ашылмалы мәзірі, Asia/Qyzylorda және UTC сақтау.
+
+12. Қолдау және қауіпсіздік
+web/account.js, backend/auth.py, portal.py. Хат тізбегі, Closed қайта ашу, сессия AuthVersion, scrypt, login шектеуі, CSRF, SQL параметрлері.
+
+13. API және код
+backend бөлек модульдері, web ES modules. Тізім, CRUD, status, trip, payment, file, report, profile және support endpoint-тері. Нұсқаулық файл картасын береді.
+
+14. Қосымша көмекші
+Кабинеттегі қысқа көмек — ережеге негізделген нұсқаулық. AI деп көрсетілмейді, өздігінен SQL өзгерісін жасамайды.
+
+15–16. Орнату және Windows
+FIRST_RUN.bat, START.bat, SET_ADMIN.bat, BACKUP.bat, backend/install.py/manage.py.
+Жаңа QazCargo дайын. QazCargo13 сақталды. Backup → VERIFYONLY → дәл растау; қауіпті база атаулары қабылданбайды.
+README_KZ.md, START_HERE_KZ.txt; Visual Studio .sln/.pyproj және VS Code workspace; SSMS 03_verify.sql.
+
+17. Түсіндірме
+docs/QazCargo_Tusindirme.docx; 17 бөлім, барлық 17 кесте, FK, ER, код, қауіпсіздік, Windows нұсқаулығы, скриншоттар, тесттер, қорғау.
+
+18. Қабылдау
+tests және VALIDATION.txt. Нақты SQL тесті, браузердегі рөлдер арасындағы байланыс. Тексерілмеген принтер/толық IDE/таза екінші компьютер туралы ашық жазылған.
+
+19–20. Үлгі архив және жеткізу
+Жаңа жеке QazCargo папкасы. tools/package_project.py ZIP жасайды және әр файлдың SHA256 мәнін қайта тексереді. .env, .venv, QA файлдары, жеке пароль және .bak архивке кірмейді.

@@ -1,0 +1,47 @@
+﻿QAZCARGO — ЖҮК ТАСЫМАЛДАУДЫ БАСҚАРУ
+
+Барлық код пен құжат осы QazCargo папкасында.
+
+ОСЫ КОМПЬЮТЕРДЕ
+Жаңа QazCargo базасы және Python ортасы дайын. Бұрынғы QazCargo13 сақталды.
+1. Бар аккаунтыңызбен кіріңіз. Бірінші әкімші жоқ болса ғана SET_ADMIN.bat қолданыңыз.
+2. START.bat ашыңыз. Егер сервер әлі қосулы болса, екінші көшірмесін қоспаңыз.
+3. http://127.0.0.1:5000 адресін браузерде ашыңыз.
+4. Әкімші: /login?role=admin. Клиент: /login → Тіркелу.
+
+БАСҚА КОМПЬЮТЕРДЕ
+ZIP-ті толық шығарыңыз. Python, SQL Server және ODBC Driver 18 орнатыңыз.
+FIRST_RUN.bat алғашқы орнатуды жүргізеді. Күнделікті START.bat қолданылады.
+Қадамдардың толық түсіндірмесі: README_KZ.md.
+
+КОДТЫ АШУ
+Visual Studio Code: OPEN_VSCODE.bat немесе QazCargo.code-workspace.
+Толық Visual Studio: QazCargo.sln; Python development workload керек.
+Python entry point: run.py. Орта: .venv\Scripts\python.exe.
+SSMS: database\03_verify.sql арқылы сайттың нақты SQL дерегін тексеріңіз.
+
+НЕ ҚАЙДА?
+backend — Python Flask API және SQL қосылымы.
+database — миграциялармен бірге 19 кесте, шектеулер, байланыстар, триггерлер, seed және SELECT.
+web — басты бет, әкімші, клиент, HTML/CSS/JavaScript, үш тіл.
+docs\QazCargo_Tusindirme.docx — толық қазақша Word түсіндірмесі.
+docs\DEFENSE_KZ.txt — қорғау баяндамасы және сұрақ-жауап.
+VALIDATION.txt — тексерілген сценарийлер мен тексерілмеген шектеулер.
+tests — нақты SQL Server-мен автоматты интеграциялық сынақтар.
+QazCargo_Full.zip — код, SQL, құжат және нұсқаулықтың тасымалданатын архиві.
+
+Қауіпсіздік: дайын ортақ admin паролі жоқ. .env және .venv ZIP-ке кірмейді.
+Төлем бөлімі — оқу есебі, банк картасынан ақша алынбайды.
+
+2026-10-29 ЖАҢАРТУЫ
+3D карта: http://127.0.0.1:5000/#route-map
+Осы ноутбук жаңартылды, аккаунттарыңыз сақталды. Басқа ескі орнату үшін UPDATE_DATABASE.bat.
+Жаңарту нұсқаулығы: docs/3D_JANARTU_KZ.txt және docs/QazCargo_3D_Janartu.docx.
+
+ҚОЛДАНУДЫ ЖЕҢІЛДЕТУ
+Ctrl+K — іздеу. Жаңа тапсырыс — 4 қадам. Черновик автоматты сақталады.
+Кабинетті Ctrl+F5 арқылы жаңартыңыз. Толығырақ: docs/USABILITY_KZ.txt.
+
+90 ҚАЛА ЖӘНЕ 8 010 БАҒЫТ
+http://127.0.0.1:5000/#route-map → Ctrl+F5. Қалаларды таңдаңыз.
+Қашықтық дереккөзден алынды. Толық түсіндірме: docs/ROAD_NETWORK_KZ.txt.

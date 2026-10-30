@@ -1,19 +1,23 @@
-# Python and local environment
-venv/
 .venv/
-__pycache__/
-*.py[cod]
-.pytest_cache/
+venv/
 .env
 .env.*
 !.env.example
-# Generated local database and logs
 *.db
-*.db-journal
-*.db-shm
-*.db-wal
+*.db-*
+*.sqlite*
+*.zip
+PACKAGE_MANIFEST.json
+SHA256SUMS.txt
 *.log
-# IDE and OS files
-.idea/
-.DS_Store
-Thumbs.db
+__pycache__/
+.pytest_cache/
+*.pyc
+*.bak
+BACKUP_LOCATIONS.txt
+node_modules/
+.vs/
+*.suo
+*.user
+qa/
+SHARE_LINK.txt

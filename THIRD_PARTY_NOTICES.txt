@@ -1,0 +1,15 @@
+Three.js 0.186.1
+Source: https://registry.npmjs.org/three/-/three-0.186.1.tgz
+Package SHA512 (base64): blFeqb49wRCSGUGj7gtpfnSGHy2lwDk94RhUmS1c/hTby70kvChbWpkJ4Pm1390LqzzvTmzgXKHPEafJwCb8jA==
+Files: web/vendor/three.module.js and three.core.js
+License: MIT; full text in web/vendor/THREE-LICENSE.txt
+Documentation: https://threejs.org/docs/
+
+Kazakhstan outline
+Natural Earth 1:110m Admin 0 countries, feature ADM0_A3=KAZ.
+Source: https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_admin_0_countries.geojson
+Extracted geometry only in web/data/kazakhstan.json.
+Public domain: https://www.naturalearthdata.com/about/terms-of-use/
+Retrieved: 2026-10-29. Schematic boundary, not surveying/navigation data.
+City centres are approximate fixed coordinates in web/route-map.js.
+Route distances come from the existing QazCargo demonstration SQL catalogue.

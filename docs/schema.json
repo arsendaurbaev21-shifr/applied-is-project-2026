@@ -1,0 +1,2629 @@
+[
+  {
+    "name": "Trips",
+    "columns": [
+      {
+        "name": "TripID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": true,
+        "default_value": null
+      },
+      {
+        "name": "OrderID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "VehicleID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "DriverID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "DepartureAt",
+        "type": "datetime2",
+        "max_length": 6,
+        "precision": 19,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "ArrivalAt",
+        "type": "datetime2",
+        "max_length": 6,
+        "precision": 19,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Status",
+        "type": "nvarchar",
+        "max_length": 40,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "(N'Planned')"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "column_name": "OrderID",
+        "referenced_table": "Orders",
+        "referenced_column": "OrderID",
+        "on_delete": "NO_ACTION"
+      },
+      {
+        "column_name": "VehicleID",
+        "referenced_table": "Vehicles",
+        "referenced_column": "VehicleID",
+        "on_delete": "NO_ACTION"
+      },
+      {
+        "column_name": "DriverID",
+        "referenced_table": "Drivers",
+        "referenced_column": "DriverID",
+        "on_delete": "NO_ACTION"
+      }
+    ],
+    "indexes": [
+      {
+        "name": "PK_Trips",
+        "is_unique": true,
+        "is_primary_key": true,
+        "filter_definition": null,
+        "column_name": "TripID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "UQ_Trips_OrderID",
+        "is_unique": true,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "OrderID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_Trips_VehicleTime",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "Status",
+        "is_included_column": true,
+        "key_ordinal": 0
+      },
+      {
+        "name": "IX_Trips_VehicleTime",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "OrderID",
+        "is_included_column": true,
+        "key_ordinal": 0
+      },
+      {
+        "name": "IX_Trips_VehicleTime",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "VehicleID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_Trips_VehicleTime",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "DepartureAt",
+        "is_included_column": false,
+        "key_ordinal": 2
+      },
+      {
+        "name": "IX_Trips_VehicleTime",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "ArrivalAt",
+        "is_included_column": false,
+        "key_ordinal": 3
+      },
+      {
+        "name": "IX_Trips_DriverTime",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "Status",
+        "is_included_column": true,
+        "key_ordinal": 0
+      },
+      {
+        "name": "IX_Trips_DriverTime",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "OrderID",
+        "is_included_column": true,
+        "key_ordinal": 0
+      },
+      {
+        "name": "IX_Trips_DriverTime",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "DriverID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_Trips_DriverTime",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "DepartureAt",
+        "is_included_column": false,
+        "key_ordinal": 2
+      },
+      {
+        "name": "IX_Trips_DriverTime",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "ArrivalAt",
+        "is_included_column": false,
+        "key_ordinal": 3
+      }
+    ],
+    "checks": [
+      {
+        "name": "CK_Trips_Time",
+        "definition": "([ArrivalAt]>[DepartureAt])"
+      },
+      {
+        "name": "CK_Trips_Status",
+        "definition": "([Status]=N'Cancelled' OR [Status]=N'Completed' OR [Status]=N'InTransit' OR [Status]=N'Planned')"
+      }
+    ]
+  },
+  {
+    "name": "Payments",
+    "columns": [
+      {
+        "name": "PaymentID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": true,
+        "default_value": null
+      },
+      {
+        "name": "OrderID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Amount",
+        "type": "decimal",
+        "max_length": 9,
+        "precision": 14,
+        "scale": 2,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "PaidAt",
+        "type": "datetime2",
+        "max_length": 6,
+        "precision": 19,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "(sysutcdatetime())"
+      },
+      {
+        "name": "Method",
+        "type": "nvarchar",
+        "max_length": 40,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Note",
+        "type": "nvarchar",
+        "max_length": 500,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      }
+    ],
+    "foreign_keys": [
+      {
+        "column_name": "OrderID",
+        "referenced_table": "Orders",
+        "referenced_column": "OrderID",
+        "on_delete": "NO_ACTION"
+      }
+    ],
+    "indexes": [
+      {
+        "name": "PK_Payments",
+        "is_unique": true,
+        "is_primary_key": true,
+        "filter_definition": null,
+        "column_name": "PaymentID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_Payments_Order",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "Amount",
+        "is_included_column": true,
+        "key_ordinal": 0
+      },
+      {
+        "name": "IX_Payments_Order",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "OrderID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_Payments_Date",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "OrderID",
+        "is_included_column": true,
+        "key_ordinal": 0
+      },
+      {
+        "name": "IX_Payments_Date",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "Amount",
+        "is_included_column": true,
+        "key_ordinal": 0
+      },
+      {
+        "name": "IX_Payments_Date",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "PaidAt",
+        "is_included_column": false,
+        "key_ordinal": 1
+      }
+    ],
+    "checks": [
+      {
+        "name": "CK_Payments_Amount",
+        "definition": "([Amount]>(0))"
+      },
+      {
+        "name": "CK_Payments_Method",
+        "definition": "([Method]=N'Transfer' OR [Method]=N'Card' OR [Method]=N'Cash')"
+      }
+    ]
+  },
+  {
+    "name": "OrderStatusHistory",
+    "columns": [
+      {
+        "name": "HistoryID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": true,
+        "default_value": null
+      },
+      {
+        "name": "OrderID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "OldStatus",
+        "type": "nvarchar",
+        "max_length": 40,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "NewStatus",
+        "type": "nvarchar",
+        "max_length": 40,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "ChangedAt",
+        "type": "datetime2",
+        "max_length": 6,
+        "precision": 19,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "(sysutcdatetime())"
+      },
+      {
+        "name": "Note",
+        "type": "nvarchar",
+        "max_length": 500,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      }
+    ],
+    "foreign_keys": [
+      {
+        "column_name": "OrderID",
+        "referenced_table": "Orders",
+        "referenced_column": "OrderID",
+        "on_delete": "NO_ACTION"
+      }
+    ],
+    "indexes": [
+      {
+        "name": "PK_OrderStatusHistory",
+        "is_unique": true,
+        "is_primary_key": true,
+        "filter_definition": null,
+        "column_name": "HistoryID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_History_OrderTime",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "OrderID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_History_OrderTime",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "ChangedAt",
+        "is_included_column": false,
+        "key_ordinal": 2
+      },
+      {
+        "name": "IX_History_OrderTime",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "HistoryID",
+        "is_included_column": false,
+        "key_ordinal": 3
+      }
+    ],
+    "checks": [
+      {
+        "name": "CK_History_Old",
+        "definition": "([OldStatus] IS NULL OR ([OldStatus]=N'Cancelled' OR [OldStatus]=N'Delivered' OR [OldStatus]=N'InTransit' OR [OldStatus]=N'Confirmed' OR [OldStatus]=N'New'))"
+      },
+      {
+        "name": "CK_History_New",
+        "definition": "([NewStatus]=N'Cancelled' OR [NewStatus]=N'Delivered' OR [NewStatus]=N'InTransit' OR [NewStatus]=N'Confirmed' OR [NewStatus]=N'New')"
+      }
+    ]
+  },
+  {
+    "name": "Users",
+    "columns": [
+      {
+        "name": "UserID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": true,
+        "default_value": null
+      },
+      {
+        "name": "Email",
+        "type": "nvarchar",
+        "max_length": 240,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "FullName",
+        "type": "nvarchar",
+        "max_length": 240,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "PasswordHash",
+        "type": "nvarchar",
+        "max_length": 510,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Role",
+        "type": "varchar",
+        "max_length": 10,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "ClientID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "IsActive",
+        "type": "bit",
+        "max_length": 1,
+        "precision": 1,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "((1))"
+      },
+      {
+        "name": "AuthVersion",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "((1))"
+      },
+      {
+        "name": "FailedAttempts",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "((0))"
+      },
+      {
+        "name": "LockedUntil",
+        "type": "datetime2",
+        "max_length": 6,
+        "precision": 19,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "CreatedAt",
+        "type": "datetime2",
+        "max_length": 6,
+        "precision": 19,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "(sysutcdatetime())"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "column_name": "ClientID",
+        "referenced_table": "Clients",
+        "referenced_column": "ClientID",
+        "on_delete": "NO_ACTION"
+      }
+    ],
+    "indexes": [
+      {
+        "name": "PK_Users",
+        "is_unique": true,
+        "is_primary_key": true,
+        "filter_definition": null,
+        "column_name": "UserID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "UQ_Users_Email",
+        "is_unique": true,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "Email",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "UX_Users_Client",
+        "is_unique": true,
+        "is_primary_key": false,
+        "filter_definition": "([ClientID] IS NOT NULL)",
+        "column_name": "ClientID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      }
+    ],
+    "checks": [
+      {
+        "name": "CK_Users_Role",
+        "definition": "([Role]='client' OR [Role]='admin')"
+      },
+      {
+        "name": "CK_Users_Client",
+        "definition": "([Role]='client' AND [ClientID] IS NOT NULL OR [Role]='admin' AND [ClientID] IS NULL)"
+      },
+      {
+        "name": "CK_Users_NameEmail",
+        "definition": "(len(ltrim(rtrim([FullName])))>(0) AND len(ltrim(rtrim([Email])))>(0))"
+      }
+    ]
+  },
+  {
+    "name": "Documents",
+    "columns": [
+      {
+        "name": "DocumentID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": true,
+        "default_value": null
+      },
+      {
+        "name": "Title",
+        "type": "nvarchar",
+        "max_length": 320,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "OriginalName",
+        "type": "nvarchar",
+        "max_length": 510,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "MediaType",
+        "type": "varchar",
+        "max_length": 100,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Category",
+        "type": "varchar",
+        "max_length": 20,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "('other')"
+      },
+      {
+        "name": "OrderID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "OwnerUserID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "FileSize",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Content",
+        "type": "varbinary",
+        "max_length": -1,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "CreatedAt",
+        "type": "datetime2",
+        "max_length": 6,
+        "precision": 19,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "(sysutcdatetime())"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "column_name": "OrderID",
+        "referenced_table": "Orders",
+        "referenced_column": "OrderID",
+        "on_delete": "NO_ACTION"
+      },
+      {
+        "column_name": "OwnerUserID",
+        "referenced_table": "Users",
+        "referenced_column": "UserID",
+        "on_delete": "NO_ACTION"
+      }
+    ],
+    "indexes": [
+      {
+        "name": "PK_Documents",
+        "is_unique": true,
+        "is_primary_key": true,
+        "filter_definition": null,
+        "column_name": "DocumentID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_Documents_Order",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "OrderID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_Documents_Order",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "CreatedAt",
+        "is_included_column": false,
+        "key_ordinal": 2
+      },
+      {
+        "name": "IX_Documents_Owner",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "OwnerUserID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_Documents_Owner",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "CreatedAt",
+        "is_included_column": false,
+        "key_ordinal": 2
+      }
+    ],
+    "checks": [
+      {
+        "name": "CK_Documents_Size",
+        "definition": "([FileSize]>=(1) AND [FileSize]<=(20971520) AND datalength([Content])=[FileSize])"
+      },
+      {
+        "name": "CK_Documents_Title",
+        "definition": "(len(ltrim(rtrim([Title])))>(0))"
+      },
+      {
+        "name": "CK_Documents_Category",
+        "definition": "([Category]='other' OR [Category]='report' OR [Category]='photo' OR [Category]='waybill' OR [Category]='invoice' OR [Category]='contract')"
+      }
+    ]
+  },
+  {
+    "name": "SupportTickets",
+    "columns": [
+      {
+        "name": "TicketID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": true,
+        "default_value": null
+      },
+      {
+        "name": "UserID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "OrderID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Subject",
+        "type": "nvarchar",
+        "max_length": 320,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Status",
+        "type": "varchar",
+        "max_length": 20,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "('Open')"
+      },
+      {
+        "name": "CreatedAt",
+        "type": "datetime2",
+        "max_length": 6,
+        "precision": 19,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "(sysutcdatetime())"
+      },
+      {
+        "name": "UpdatedAt",
+        "type": "datetime2",
+        "max_length": 6,
+        "precision": 19,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "(sysutcdatetime())"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "column_name": "UserID",
+        "referenced_table": "Users",
+        "referenced_column": "UserID",
+        "on_delete": "NO_ACTION"
+      },
+      {
+        "column_name": "OrderID",
+        "referenced_table": "Orders",
+        "referenced_column": "OrderID",
+        "on_delete": "NO_ACTION"
+      }
+    ],
+    "indexes": [
+      {
+        "name": "PK_SupportTickets",
+        "is_unique": true,
+        "is_primary_key": true,
+        "filter_definition": null,
+        "column_name": "TicketID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_SupportTickets_User",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "UserID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_SupportTickets_User",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "UpdatedAt",
+        "is_included_column": false,
+        "key_ordinal": 2
+      },
+      {
+        "name": "IX_SupportTickets_Order",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "OrderID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      }
+    ],
+    "checks": [
+      {
+        "name": "CK_SupportTickets_Status",
+        "definition": "([Status]='Closed' OR [Status]='InProgress' OR [Status]='Open')"
+      },
+      {
+        "name": "CK_Support_Subject",
+        "definition": "(len(ltrim(rtrim([Subject])))>(0))"
+      }
+    ]
+  },
+  {
+    "name": "TicketMessages",
+    "columns": [
+      {
+        "name": "MessageID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": true,
+        "default_value": null
+      },
+      {
+        "name": "TicketID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "UserID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Body",
+        "type": "nvarchar",
+        "max_length": 4000,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "CreatedAt",
+        "type": "datetime2",
+        "max_length": 6,
+        "precision": 19,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "(sysutcdatetime())"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "column_name": "TicketID",
+        "referenced_table": "SupportTickets",
+        "referenced_column": "TicketID",
+        "on_delete": "NO_ACTION"
+      },
+      {
+        "column_name": "UserID",
+        "referenced_table": "Users",
+        "referenced_column": "UserID",
+        "on_delete": "NO_ACTION"
+      }
+    ],
+    "indexes": [
+      {
+        "name": "PK_TicketMessages",
+        "is_unique": true,
+        "is_primary_key": true,
+        "filter_definition": null,
+        "column_name": "MessageID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_TicketMessages_Ticket",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "TicketID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_TicketMessages_Ticket",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "MessageID",
+        "is_included_column": false,
+        "key_ordinal": 2
+      },
+      {
+        "name": "IX_TicketMessages_User",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "UserID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      }
+    ],
+    "checks": [
+      {
+        "name": "CK_TicketMessages_Body",
+        "definition": "(len(ltrim(rtrim([Body])))>(0))"
+      }
+    ]
+  },
+  {
+    "name": "Clients",
+    "columns": [
+      {
+        "name": "ClientID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": true,
+        "default_value": null
+      },
+      {
+        "name": "Name",
+        "type": "nvarchar",
+        "max_length": 240,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Phone",
+        "type": "nvarchar",
+        "max_length": 60,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Email",
+        "type": "nvarchar",
+        "max_length": 240,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Address",
+        "type": "nvarchar",
+        "max_length": 500,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "CreatedAt",
+        "type": "datetime2",
+        "max_length": 6,
+        "precision": 19,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "(sysutcdatetime())"
+      }
+    ],
+    "foreign_keys": [],
+    "indexes": [
+      {
+        "name": "PK_Clients",
+        "is_unique": true,
+        "is_primary_key": true,
+        "filter_definition": null,
+        "column_name": "ClientID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      }
+    ],
+    "checks": [
+      {
+        "name": "CK_Clients_Name",
+        "definition": "(len(ltrim(rtrim([Name])))>(0))"
+      },
+      {
+        "name": "CK_Clients_Phone",
+        "definition": "(len(ltrim(rtrim([Phone])))>(0))"
+      }
+    ]
+  },
+  {
+    "name": "Cities",
+    "columns": [
+      {
+        "name": "CityID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": true,
+        "default_value": null
+      },
+      {
+        "name": "Name",
+        "type": "nvarchar",
+        "max_length": 160,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Latitude",
+        "type": "decimal",
+        "max_length": 5,
+        "precision": 9,
+        "scale": 6,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Longitude",
+        "type": "decimal",
+        "max_length": 5,
+        "precision": 9,
+        "scale": 6,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Region",
+        "type": "nvarchar",
+        "max_length": 200,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "GeoSourceID",
+        "type": "nvarchar",
+        "max_length": 160,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "GeoSourceURL",
+        "type": "nvarchar",
+        "max_length": 700,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      }
+    ],
+    "foreign_keys": [],
+    "indexes": [
+      {
+        "name": "PK_Cities",
+        "is_unique": true,
+        "is_primary_key": true,
+        "filter_definition": null,
+        "column_name": "CityID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "UQ_Cities_Name",
+        "is_unique": true,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "Name",
+        "is_included_column": false,
+        "key_ordinal": 1
+      }
+    ],
+    "checks": [
+      {
+        "name": "CK_Cities_Name",
+        "definition": "(len(ltrim(rtrim([Name])))>(0))"
+      },
+      {
+        "name": "CK_Cities_Coordinates",
+        "definition": "([Latitude] IS NULL AND [Longitude] IS NULL OR [Latitude]>=(-90) AND [Latitude]<=(90) AND ([Longitude]>=(-180) AND [Longitude]<=(180)) AND [Latitude] IS NOT NULL AND [Longitude] IS NOT NULL)"
+      }
+    ]
+  },
+  {
+    "name": "Notifications",
+    "columns": [
+      {
+        "name": "NotificationID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": true,
+        "default_value": null
+      },
+      {
+        "name": "UserID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "OrderID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "EventType",
+        "type": "varchar",
+        "max_length": 30,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "NewStatus",
+        "type": "nvarchar",
+        "max_length": 40,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "CreatedAt",
+        "type": "datetime2",
+        "max_length": 6,
+        "precision": 19,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "(sysutcdatetime())"
+      },
+      {
+        "name": "ReadAt",
+        "type": "datetime2",
+        "max_length": 6,
+        "precision": 19,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      }
+    ],
+    "foreign_keys": [
+      {
+        "column_name": "UserID",
+        "referenced_table": "Users",
+        "referenced_column": "UserID",
+        "on_delete": "NO_ACTION"
+      },
+      {
+        "column_name": "OrderID",
+        "referenced_table": "Orders",
+        "referenced_column": "OrderID",
+        "on_delete": "NO_ACTION"
+      }
+    ],
+    "indexes": [
+      {
+        "name": "PK_Notifications",
+        "is_unique": true,
+        "is_primary_key": true,
+        "filter_definition": null,
+        "column_name": "NotificationID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_Notifications_UserRead",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "UserID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_Notifications_UserRead",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "ReadAt",
+        "is_included_column": false,
+        "key_ordinal": 2
+      },
+      {
+        "name": "IX_Notifications_UserRead",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "NotificationID",
+        "is_included_column": false,
+        "key_ordinal": 3
+      },
+      {
+        "name": "IX_Notifications_Order",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "OrderID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      }
+    ],
+    "checks": [
+      {
+        "name": "CK_Notifications_Type",
+        "definition": "([EventType]='delivery_updated' OR [EventType]='trip_updated' OR [EventType]='status_changed' OR [EventType]='order_created')"
+      },
+      {
+        "name": "CK_Notifications_Status",
+        "definition": "([NewStatus] IS NULL OR ([NewStatus]='Cancelled' OR [NewStatus]='Delivered' OR [NewStatus]='InTransit' OR [NewStatus]='Confirmed' OR [NewStatus]='New'))"
+      }
+    ]
+  },
+  {
+    "name": "VehicleTypes",
+    "columns": [
+      {
+        "name": "VehicleTypeID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": true,
+        "default_value": null
+      },
+      {
+        "name": "Name",
+        "type": "nvarchar",
+        "max_length": 120,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      }
+    ],
+    "foreign_keys": [],
+    "indexes": [
+      {
+        "name": "PK_VehicleTypes",
+        "is_unique": true,
+        "is_primary_key": true,
+        "filter_definition": null,
+        "column_name": "VehicleTypeID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "UQ_VehicleTypes_Name",
+        "is_unique": true,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "Name",
+        "is_included_column": false,
+        "key_ordinal": 1
+      }
+    ],
+    "checks": [
+      {
+        "name": "CK_VehicleTypes_Name",
+        "definition": "(len(ltrim(rtrim([Name])))>(0))"
+      }
+    ]
+  },
+  {
+    "name": "Vehicles",
+    "columns": [
+      {
+        "name": "VehicleID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": true,
+        "default_value": null
+      },
+      {
+        "name": "VehicleTypeID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "PlateNumber",
+        "type": "nvarchar",
+        "max_length": 40,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Brand",
+        "type": "nvarchar",
+        "max_length": 160,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "CapacityKg",
+        "type": "decimal",
+        "max_length": 9,
+        "precision": 12,
+        "scale": 2,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "IsActive",
+        "type": "bit",
+        "max_length": 1,
+        "precision": 1,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "((1))"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "column_name": "VehicleTypeID",
+        "referenced_table": "VehicleTypes",
+        "referenced_column": "VehicleTypeID",
+        "on_delete": "NO_ACTION"
+      }
+    ],
+    "indexes": [
+      {
+        "name": "PK_Vehicles",
+        "is_unique": true,
+        "is_primary_key": true,
+        "filter_definition": null,
+        "column_name": "VehicleID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "UQ_Vehicles_PlateNumber",
+        "is_unique": true,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "PlateNumber",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_Vehicles_Type",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "VehicleTypeID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      }
+    ],
+    "checks": [
+      {
+        "name": "CK_Vehicles_Capacity",
+        "definition": "([CapacityKg]>(0))"
+      },
+      {
+        "name": "CK_Vehicles_Plate",
+        "definition": "(len(ltrim(rtrim([PlateNumber])))>(0))"
+      },
+      {
+        "name": "CK_Vehicles_Brand",
+        "definition": "(len(ltrim(rtrim([Brand])))>(0))"
+      }
+    ]
+  },
+  {
+    "name": "OrderDrafts",
+    "columns": [
+      {
+        "name": "DraftID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": true,
+        "default_value": null
+      },
+      {
+        "name": "DraftKey",
+        "type": "varchar",
+        "max_length": 36,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "UserID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Payload",
+        "type": "nvarchar",
+        "max_length": -1,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Step",
+        "type": "tinyint",
+        "max_length": 1,
+        "precision": 3,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "((0))"
+      },
+      {
+        "name": "Revision",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "((1))"
+      },
+      {
+        "name": "UpdatedAt",
+        "type": "datetime2",
+        "max_length": 6,
+        "precision": 19,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "(sysutcdatetime())"
+      },
+      {
+        "name": "SubmittedOrderID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      }
+    ],
+    "foreign_keys": [
+      {
+        "column_name": "UserID",
+        "referenced_table": "Users",
+        "referenced_column": "UserID",
+        "on_delete": "NO_ACTION"
+      },
+      {
+        "column_name": "SubmittedOrderID",
+        "referenced_table": "Orders",
+        "referenced_column": "OrderID",
+        "on_delete": "NO_ACTION"
+      }
+    ],
+    "indexes": [
+      {
+        "name": "PK_OrderDrafts",
+        "is_unique": true,
+        "is_primary_key": true,
+        "filter_definition": null,
+        "column_name": "DraftID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "UQ_OrderDrafts_Key",
+        "is_unique": true,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "DraftKey",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "UX_OrderDrafts_ActiveUser",
+        "is_unique": true,
+        "is_primary_key": false,
+        "filter_definition": "([SubmittedOrderID] IS NULL)",
+        "column_name": "UserID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      }
+    ],
+    "checks": [
+      {
+        "name": "CK_OrderDrafts_JSON",
+        "definition": "(isjson([Payload])=(1))"
+      },
+      {
+        "name": "CK_OrderDrafts_Step",
+        "definition": "([Step]>=(0) AND [Step]<=(3))"
+      },
+      {
+        "name": "CK_OrderDrafts_Revision",
+        "definition": "([Revision]>(0))"
+      }
+    ]
+  },
+  {
+    "name": "Drivers",
+    "columns": [
+      {
+        "name": "DriverID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": true,
+        "default_value": null
+      },
+      {
+        "name": "FullName",
+        "type": "nvarchar",
+        "max_length": 240,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Phone",
+        "type": "nvarchar",
+        "max_length": 60,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "LicenseNumber",
+        "type": "nvarchar",
+        "max_length": 60,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "IsActive",
+        "type": "bit",
+        "max_length": 1,
+        "precision": 1,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "((1))"
+      }
+    ],
+    "foreign_keys": [],
+    "indexes": [
+      {
+        "name": "PK_Drivers",
+        "is_unique": true,
+        "is_primary_key": true,
+        "filter_definition": null,
+        "column_name": "DriverID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "UQ_Drivers_LicenseNumber",
+        "is_unique": true,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "LicenseNumber",
+        "is_included_column": false,
+        "key_ordinal": 1
+      }
+    ],
+    "checks": [
+      {
+        "name": "CK_Drivers_Name",
+        "definition": "(len(ltrim(rtrim([FullName])))>(0))"
+      },
+      {
+        "name": "CK_Drivers_Phone",
+        "definition": "(len(ltrim(rtrim([Phone])))>(0))"
+      },
+      {
+        "name": "CK_Drivers_License",
+        "definition": "(len(ltrim(rtrim([LicenseNumber])))>(0))"
+      }
+    ]
+  },
+  {
+    "name": "Routes",
+    "columns": [
+      {
+        "name": "RouteID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": true,
+        "default_value": null
+      },
+      {
+        "name": "FromCityID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "ToCityID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "DistanceKm",
+        "type": "decimal",
+        "max_length": 9,
+        "precision": 10,
+        "scale": 2,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "DistanceSource",
+        "type": "nvarchar",
+        "max_length": 200,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "DistanceUpdatedAt",
+        "type": "date",
+        "max_length": 3,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      }
+    ],
+    "foreign_keys": [
+      {
+        "column_name": "FromCityID",
+        "referenced_table": "Cities",
+        "referenced_column": "CityID",
+        "on_delete": "NO_ACTION"
+      },
+      {
+        "column_name": "ToCityID",
+        "referenced_table": "Cities",
+        "referenced_column": "CityID",
+        "on_delete": "NO_ACTION"
+      }
+    ],
+    "indexes": [
+      {
+        "name": "PK_Routes",
+        "is_unique": true,
+        "is_primary_key": true,
+        "filter_definition": null,
+        "column_name": "RouteID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "UQ_Routes_CityPair",
+        "is_unique": true,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "FromCityID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "UQ_Routes_CityPair",
+        "is_unique": true,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "ToCityID",
+        "is_included_column": false,
+        "key_ordinal": 2
+      },
+      {
+        "name": "IX_Routes_ToCity",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "ToCityID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      }
+    ],
+    "checks": [
+      {
+        "name": "CK_Routes_DifferentCities",
+        "definition": "([FromCityID]<>[ToCityID])"
+      },
+      {
+        "name": "CK_Routes_Distance",
+        "definition": "([DistanceKm]>(0))"
+      }
+    ]
+  },
+  {
+    "name": "CargoTypes",
+    "columns": [
+      {
+        "name": "CargoTypeID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": true,
+        "default_value": null
+      },
+      {
+        "name": "Name",
+        "type": "nvarchar",
+        "max_length": 160,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Description",
+        "type": "nvarchar",
+        "max_length": 500,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      }
+    ],
+    "foreign_keys": [],
+    "indexes": [
+      {
+        "name": "PK_CargoTypes",
+        "is_unique": true,
+        "is_primary_key": true,
+        "filter_definition": null,
+        "column_name": "CargoTypeID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "UQ_CargoTypes_Name",
+        "is_unique": true,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "Name",
+        "is_included_column": false,
+        "key_ordinal": 1
+      }
+    ],
+    "checks": [
+      {
+        "name": "CK_CargoTypes_Name",
+        "definition": "(len(ltrim(rtrim([Name])))>(0))"
+      }
+    ]
+  },
+  {
+    "name": "Tariffs",
+    "columns": [
+      {
+        "name": "TariffID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": true,
+        "default_value": null
+      },
+      {
+        "name": "Name",
+        "type": "nvarchar",
+        "max_length": 200,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "VehicleTypeID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "BasePrice",
+        "type": "decimal",
+        "max_length": 9,
+        "precision": 14,
+        "scale": 2,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "PricePerKm",
+        "type": "decimal",
+        "max_length": 9,
+        "precision": 12,
+        "scale": 2,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "PricePerKg",
+        "type": "decimal",
+        "max_length": 9,
+        "precision": 12,
+        "scale": 2,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "IsActive",
+        "type": "bit",
+        "max_length": 1,
+        "precision": 1,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "((1))"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "column_name": "VehicleTypeID",
+        "referenced_table": "VehicleTypes",
+        "referenced_column": "VehicleTypeID",
+        "on_delete": "NO_ACTION"
+      }
+    ],
+    "indexes": [
+      {
+        "name": "PK_Tariffs",
+        "is_unique": true,
+        "is_primary_key": true,
+        "filter_definition": null,
+        "column_name": "TariffID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_Tariffs_Type",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "VehicleTypeID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      }
+    ],
+    "checks": [
+      {
+        "name": "CK_Tariffs_Prices",
+        "definition": "([BasePrice]>=(0) AND [PricePerKm]>=(0) AND [PricePerKg]>=(0))"
+      },
+      {
+        "name": "CK_Tariffs_Name",
+        "definition": "(len(ltrim(rtrim([Name])))>(0))"
+      }
+    ]
+  },
+  {
+    "name": "Orders",
+    "columns": [
+      {
+        "name": "OrderID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": true,
+        "default_value": null
+      },
+      {
+        "name": "OrderNumber",
+        "type": "nvarchar",
+        "max_length": 60,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "ClientID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "RouteID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "TariffID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "OrderDate",
+        "type": "datetime2",
+        "max_length": 6,
+        "precision": 19,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "(sysutcdatetime())"
+      },
+      {
+        "name": "PickupDate",
+        "type": "date",
+        "max_length": 3,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Status",
+        "type": "nvarchar",
+        "max_length": 40,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "(N'New')"
+      },
+      {
+        "name": "Notes",
+        "type": "nvarchar",
+        "max_length": 1000,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "QuotedAmount",
+        "type": "decimal",
+        "max_length": 9,
+        "precision": 14,
+        "scale": 2,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "((0))"
+      },
+      {
+        "name": "SenderName",
+        "type": "nvarchar",
+        "max_length": 240,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "SenderPhone",
+        "type": "nvarchar",
+        "max_length": 60,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "PickupAddress",
+        "type": "nvarchar",
+        "max_length": 500,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "RecipientName",
+        "type": "nvarchar",
+        "max_length": 240,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "RecipientPhone",
+        "type": "nvarchar",
+        "max_length": 60,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "DeliveryAddress",
+        "type": "nvarchar",
+        "max_length": 500,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "PickupWindowStart",
+        "type": "time",
+        "max_length": 3,
+        "precision": 8,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "PickupWindowEnd",
+        "type": "time",
+        "max_length": 3,
+        "precision": 8,
+        "scale": 0,
+        "is_nullable": true,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "TrackingCode",
+        "type": "varchar",
+        "max_length": 64,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": "(CONVERT([varchar](64),Crypt_Gen_Random((32)),(2)))"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "column_name": "ClientID",
+        "referenced_table": "Clients",
+        "referenced_column": "ClientID",
+        "on_delete": "NO_ACTION"
+      },
+      {
+        "column_name": "RouteID",
+        "referenced_table": "Routes",
+        "referenced_column": "RouteID",
+        "on_delete": "NO_ACTION"
+      },
+      {
+        "column_name": "TariffID",
+        "referenced_table": "Tariffs",
+        "referenced_column": "TariffID",
+        "on_delete": "NO_ACTION"
+      }
+    ],
+    "indexes": [
+      {
+        "name": "PK_Orders",
+        "is_unique": true,
+        "is_primary_key": true,
+        "filter_definition": null,
+        "column_name": "OrderID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "UQ_Orders_OrderNumber",
+        "is_unique": true,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "OrderNumber",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_Orders_Client",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "ClientID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_Orders_Route",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "RouteID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_Orders_Tariff",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "TariffID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_Orders_StatusPickup",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "QuotedAmount",
+        "is_included_column": true,
+        "key_ordinal": 0
+      },
+      {
+        "name": "IX_Orders_StatusPickup",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "Status",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_Orders_StatusPickup",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "PickupDate",
+        "is_included_column": false,
+        "key_ordinal": 2
+      },
+      {
+        "name": "IX_Orders_Date",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "ClientID",
+        "is_included_column": true,
+        "key_ordinal": 0
+      },
+      {
+        "name": "IX_Orders_Date",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "Status",
+        "is_included_column": true,
+        "key_ordinal": 0
+      },
+      {
+        "name": "IX_Orders_Date",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "QuotedAmount",
+        "is_included_column": true,
+        "key_ordinal": 0
+      },
+      {
+        "name": "IX_Orders_Date",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "OrderDate",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "UX_Orders_TrackingCode",
+        "is_unique": true,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "TrackingCode",
+        "is_included_column": false,
+        "key_ordinal": 1
+      }
+    ],
+    "checks": [
+      {
+        "name": "CK_Orders_PickupWindow",
+        "definition": "([PickupWindowStart] IS NULL AND [PickupWindowEnd] IS NULL OR [PickupWindowStart] IS NOT NULL AND [PickupWindowEnd] IS NOT NULL AND [PickupWindowEnd]>[PickupWindowStart])"
+      },
+      {
+        "name": "CK_Orders_Status",
+        "definition": "([Status]=N'Cancelled' OR [Status]=N'Delivered' OR [Status]=N'InTransit' OR [Status]=N'Confirmed' OR [Status]=N'New')"
+      },
+      {
+        "name": "CK_Orders_Quote",
+        "definition": "([QuotedAmount]>=(0))"
+      },
+      {
+        "name": "CK_Orders_Number",
+        "definition": "(len(ltrim(rtrim([OrderNumber])))>(0))"
+      }
+    ]
+  },
+  {
+    "name": "CargoItems",
+    "columns": [
+      {
+        "name": "CargoItemID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": true,
+        "default_value": null
+      },
+      {
+        "name": "OrderID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "CargoTypeID",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Description",
+        "type": "nvarchar",
+        "max_length": 400,
+        "precision": 0,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "WeightKg",
+        "type": "decimal",
+        "max_length": 9,
+        "precision": 12,
+        "scale": 2,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "VolumeM3",
+        "type": "decimal",
+        "max_length": 9,
+        "precision": 12,
+        "scale": 3,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      },
+      {
+        "name": "Quantity",
+        "type": "int",
+        "max_length": 4,
+        "precision": 10,
+        "scale": 0,
+        "is_nullable": false,
+        "is_identity": false,
+        "default_value": null
+      }
+    ],
+    "foreign_keys": [
+      {
+        "column_name": "OrderID",
+        "referenced_table": "Orders",
+        "referenced_column": "OrderID",
+        "on_delete": "NO_ACTION"
+      },
+      {
+        "column_name": "CargoTypeID",
+        "referenced_table": "CargoTypes",
+        "referenced_column": "CargoTypeID",
+        "on_delete": "NO_ACTION"
+      }
+    ],
+    "indexes": [
+      {
+        "name": "PK_CargoItems",
+        "is_unique": true,
+        "is_primary_key": true,
+        "filter_definition": null,
+        "column_name": "CargoItemID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_CargoItems_Order",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "WeightKg",
+        "is_included_column": true,
+        "key_ordinal": 0
+      },
+      {
+        "name": "IX_CargoItems_Order",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "VolumeM3",
+        "is_included_column": true,
+        "key_ordinal": 0
+      },
+      {
+        "name": "IX_CargoItems_Order",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "Quantity",
+        "is_included_column": true,
+        "key_ordinal": 0
+      },
+      {
+        "name": "IX_CargoItems_Order",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "OrderID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      },
+      {
+        "name": "IX_CargoItems_Type",
+        "is_unique": false,
+        "is_primary_key": false,
+        "filter_definition": null,
+        "column_name": "CargoTypeID",
+        "is_included_column": false,
+        "key_ordinal": 1
+      }
+    ],
+    "checks": [
+      {
+        "name": "CK_CargoItems_Weight",
+        "definition": "([WeightKg]>(0))"
+      },
+      {
+        "name": "CK_CargoItems_Volume",
+        "definition": "([VolumeM3]>(0))"
+      },
+      {
+        "name": "CK_CargoItems_Quantity",
+        "definition": "([Quantity]>(0))"
+      },
+      {
+        "name": "CK_CargoItems_Description",
+        "definition": "(len(ltrim(rtrim([Description])))>(0))"
+      }
+    ]
+  }
+]

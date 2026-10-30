@@ -1,0 +1,180 @@
+2026-10-29: Қазіргі схема 18 кесте, 23 FK. Нақты метадерек docs/schema.json ішінде. Orders жаңа жеткізу өрістерін және TrackingCode қамтиды; Notifications UserID және OrderID арқылы байланысады. Төмендегі негізгі анықтамалық бастапқы нұсқаға жатады.
+
+QAZCARGO ДЕРЕКҚОР АНЫҚТАМАЛЫҒЫ
+17 кесте, 21 FK. Нақты SQL метадеректері.
+
+
+1. Trips — Рейстер
+TripID | INT | NULL NO | PK; IDENTITY(1,1) | Рейстің ішкі нөмірі | 1
+OrderID | INT | NULL NO | FK → Orders.OrderID; UNIQUE | Тапсырыстың нөмірі | 1
+VehicleID | INT | NULL NO | FK → Vehicles.VehicleID | Көліктің нөмірі | 1
+DriverID | INT | NULL NO | FK → Drivers.DriverID | Жүргізушінің нөмірі | 1
+DepartureAt | DATETIME2(0) | NULL NO | — | Рейстің шығу сәті, UTC | 2026-11-19 19:30:00
+ArrivalAt | DATETIME2(0) | NULL NO | — | Рейстің келу сәті, UTC | 2026-11-20 07:00:00
+Status | NVARCHAR(20) | NULL NO | DEFAULT (N'Planned') | Жазбаның рұқсат етілген күйі | Planned, InTransit, Completed, Cancelled
+CHECK ([ArrivalAt]>[DepartureAt])
+CHECK ([Status]=N'Cancelled' OR [Status]=N'Completed' OR [Status]=N'InTransit' OR [Status]=N'Planned')
+
+2. Payments — Төлемдер
+PaymentID | INT | NULL NO | PK; IDENTITY(1,1) | Төлемнің ішкі нөмірі | 1
+OrderID | INT | NULL NO | FK → Orders.OrderID | Тапсырыстың нөмірі | 1
+Amount | DECIMAL(14,2) | NULL NO | — | Тіркелген төлем сомасы, ₸ | 1000.00
+PaidAt | DATETIME2(0) | NULL NO | DEFAULT (sysutcdatetime()) | Төлем тіркелген сәт, UTC | 2026-10-18 12:05:00
+Method | NVARCHAR(20) | NULL NO | — | Төлемді есепке алу тәсілі | Cash / Card / Transfer
+Note | NVARCHAR(250) | NULL YES | — | Төлем не тарих түсіндірмесі | Оқу төлемі
+CHECK ([Amount]>(0))
+CHECK ([Method]=N'Transfer' OR [Method]=N'Card' OR [Method]=N'Cash')
+
+3. OrderStatusHistory — Мәртебелер тарихы
+HistoryID | INT | NULL NO | PK; IDENTITY(1,1) | Тарих оқиғасының нөмірі | 1
+OrderID | INT | NULL NO | FK → Orders.OrderID | Тапсырыстың нөмірі | 1
+OldStatus | NVARCHAR(20) | NULL YES | — | Алдыңғы күй; бірінші оқиғада NULL | New
+NewStatus | NVARCHAR(20) | NULL NO | — | Жаңа күй | Confirmed
+ChangedAt | DATETIME2(0) | NULL NO | DEFAULT (sysutcdatetime()) | Күй өзгерген сәт, UTC | 2026-10-18 12:10:00
+Note | NVARCHAR(250) | NULL YES | — | Төлем не тарих түсіндірмесі | Оқу төлемі
+CHECK ([OldStatus] IS NULL OR ([OldStatus]=N'Cancelled' OR [OldStatus]=N'Delivered' OR [OldStatus]=N'InTransit' OR [OldStatus]=N'Confirmed' OR [OldStatus]=N'New'))
+CHECK ([NewStatus]=N'Cancelled' OR [NewStatus]=N'Delivered' OR [NewStatus]=N'InTransit' OR [NewStatus]=N'Confirmed' OR [NewStatus]=N'New')
+
+4. Users — Аккаунттар
+UserID | INT | NULL NO | PK; IDENTITY(1,1) | Аккаунттың ішкі нөмірі | 1
+Email | NVARCHAR(120) | NULL NO | UNIQUE | Email мекенжайы | client@example.kz
+FullName | NVARCHAR(120) | NULL NO | — | Адамның толық аты | Оқу жүргізушісі 1
+PasswordHash | NVARCHAR(255) | NULL NO | — | Salt-пен жасалған scrypt хеші; ашық пароль емес | scrypt:… [хеш]
+Role | VARCHAR(10) | NULL NO | — | Сервер тексеретін рөл | admin / client
+ClientID | INT | NULL YES | FK → Clients.ClientID; UNIQUE; тек NULL емес | Клиенттің ішкі нөмірі | 1
+IsActive | BIT | NULL NO | DEFAULT ((1)) | Қолдануға рұқсат белгісі | 1 = белсенді
+AuthVersion | INT | NULL NO | DEFAULT ((1)) | Сессияны қайтарып алу нұсқасы | 1, пароль өзгерсе 2
+FailedAttempts | INT | NULL NO | DEFAULT ((0)) | Қате кіру әрекеттерінің саны | 0–5
+LockedUntil | DATETIME2(0) | NULL YES | — | Уақытша кіру шектеуінің UTC соңы | NULL не UTC уақыт
+CreatedAt | DATETIME2(0) | NULL NO | DEFAULT (sysutcdatetime()) | Жасалған сәт, UTC | 2026-10-18 12:00:00
+CHECK ([Role]='client' OR [Role]='admin')
+CHECK ([Role]='client' AND [ClientID] IS NOT NULL OR [Role]='admin' AND [ClientID] IS NULL)
+CHECK (len(ltrim(rtrim([FullName])))>(0) AND len(ltrim(rtrim([Email])))>(0))
+
+5. Documents — Құжаттар
+DocumentID | INT | NULL NO | PK; IDENTITY(1,1) | Құжаттың ішкі нөмірі | 1
+Title | NVARCHAR(160) | NULL NO | — | Құжаттың интерфейстегі атауы | Тасымал шарты
+OriginalName | NVARCHAR(255) | NULL NO | — | Түпнұсқа файл атауы | contract.pdf
+MediaType | VARCHAR(100) | NULL NO | — | Тексерілген MIME түрі | application/pdf
+Category | VARCHAR(20) | NULL NO | DEFAULT ('other') | Құжат санаты | contract
+OrderID | INT | NULL YES | FK → Orders.OrderID | Тапсырыстың нөмірі | 1
+OwnerUserID | INT | NULL NO | FK → Users.UserID | Файлды жүктеген аккаунт | 2
+FileSize | INT | NULL NO | — | Файл байттарының саны | 2048
+Content | VARBINARY(MAX) | NULL NO | — | Файлдың нақты бинарлық байттары | 0x25504446…
+CreatedAt | DATETIME2(0) | NULL NO | DEFAULT (sysutcdatetime()) | Жасалған сәт, UTC | 2026-10-18 12:00:00
+CHECK ([FileSize]>=(1) AND [FileSize]<=(20971520) AND datalength([Content])=[FileSize])
+CHECK (len(ltrim(rtrim([Title])))>(0))
+CHECK ([Category]='other' OR [Category]='report' OR [Category]='photo' OR [Category]='waybill' OR [Category]='invoice' OR [Category]='contract')
+
+6. SupportTickets — Қолдау өтініштері
+TicketID | INT | NULL NO | PK; IDENTITY(1,1) | Қолдау өтінішінің нөмірі | 1
+UserID | INT | NULL NO | FK → Users.UserID | Аккаунттың ішкі нөмірі | 1
+OrderID | INT | NULL YES | FK → Orders.OrderID | Тапсырыстың нөмірі | 1
+Subject | NVARCHAR(160) | NULL NO | — | Қолдау өтінішінің тақырыбы | Жеткізу туралы сұрақ
+Status | VARCHAR(20) | NULL NO | DEFAULT ('Open') | Жазбаның рұқсат етілген күйі | Open, InProgress, Closed
+CreatedAt | DATETIME2(0) | NULL NO | DEFAULT (sysutcdatetime()) | Жасалған сәт, UTC | 2026-10-18 12:00:00
+UpdatedAt | DATETIME2(0) | NULL NO | DEFAULT (sysutcdatetime()) | Соңғы жауап/күй өзгерісінің UTC уақыты | 2026-10-18 13:00:00
+CHECK ([Status]='Closed' OR [Status]='InProgress' OR [Status]='Open')
+CHECK (len(ltrim(rtrim([Subject])))>(0))
+
+7. TicketMessages — Қолдау хаттары
+MessageID | INT | NULL NO | PK; IDENTITY(1,1) | Хабарламаның нөмірі | 1
+TicketID | INT | NULL NO | FK → SupportTickets.TicketID | Қолдау өтінішінің нөмірі | 1
+UserID | INT | NULL NO | FK → Users.UserID | Аккаунттың ішкі нөмірі | 1
+Body | NVARCHAR(2000) | NULL NO | — | Қолдау хабарламасының таза мәтіні | Жүктің мәртебесін түсіндіріңіз
+CreatedAt | DATETIME2(0) | NULL NO | DEFAULT (sysutcdatetime()) | Жасалған сәт, UTC | 2026-10-18 12:00:00
+CHECK (len(ltrim(rtrim([Body])))>(0))
+
+8. Clients — Клиенттер
+ClientID | INT | NULL NO | PK; IDENTITY(1,1) | Клиенттің ішкі нөмірі | 1
+Name | NVARCHAR(120) | NULL NO | — | Атауы не клиент аты | Оқу клиенті
+Phone | NVARCHAR(30) | NULL NO | — | Байланыс телефоны | Оқу үлгісі
+Email | NVARCHAR(120) | NULL YES | — | Email мекенжайы | client@example.kz
+Address | NVARCHAR(250) | NULL YES | — | Жеткізу не байланыс мекенжайы | Оқу мекенжайы
+CreatedAt | DATETIME2(0) | NULL NO | DEFAULT (sysutcdatetime()) | Жасалған сәт, UTC | 2026-10-18 12:00:00
+CHECK (len(ltrim(rtrim([Name])))>(0))
+CHECK (len(ltrim(rtrim([Phone])))>(0))
+
+9. Cities — Қалалар
+CityID | INT | NULL NO | PK; IDENTITY(1,1) | Қаланың ішкі нөмірі | 1
+Name | NVARCHAR(80) | NULL NO | UNIQUE | Атауы не клиент аты | Астана
+CHECK (len(ltrim(rtrim([Name])))>(0))
+
+10. VehicleTypes — Көлік түрлері
+VehicleTypeID | INT | NULL NO | PK; IDENTITY(1,1) | Көлік түрінің нөмірі | 1
+Name | NVARCHAR(60) | NULL NO | UNIQUE | Атауы не клиент аты | Тент
+CHECK (len(ltrim(rtrim([Name])))>(0))
+
+11. Vehicles — Көліктер
+VehicleID | INT | NULL NO | PK; IDENTITY(1,1) | Көліктің нөмірі | 1
+VehicleTypeID | INT | NULL NO | FK → VehicleTypes.VehicleTypeID | Көлік түрінің нөмірі | 1
+PlateNumber | NVARCHAR(20) | NULL NO | UNIQUE | Бірегей көлік нөмірі | DEMO-001
+Brand | NVARCHAR(80) | NULL NO | — | Көлік маркасы | Volvo · оқу үлгісі
+CapacityKg | DECIMAL(12,2) | NULL NO | — | Ең жоғары жүк салмағы, кг | 20000.00
+IsActive | BIT | NULL NO | DEFAULT ((1)) | Қолдануға рұқсат белгісі | 1 = белсенді
+CHECK ([CapacityKg]>(0))
+CHECK (len(ltrim(rtrim([PlateNumber])))>(0))
+CHECK (len(ltrim(rtrim([Brand])))>(0))
+
+12. Drivers — Жүргізушілер
+DriverID | INT | NULL NO | PK; IDENTITY(1,1) | Жүргізушінің нөмірі | 1
+FullName | NVARCHAR(120) | NULL NO | — | Адамның толық аты | Оқу жүргізушісі 1
+Phone | NVARCHAR(30) | NULL NO | — | Байланыс телефоны | Оқу үлгісі
+LicenseNumber | NVARCHAR(30) | NULL NO | UNIQUE | Бірегей жүргізуші куәлігі | DEMO-LIC-001
+IsActive | BIT | NULL NO | DEFAULT ((1)) | Қолдануға рұқсат белгісі | 1 = белсенді
+CHECK (len(ltrim(rtrim([FullName])))>(0))
+CHECK (len(ltrim(rtrim([Phone])))>(0))
+CHECK (len(ltrim(rtrim([LicenseNumber])))>(0))
+
+13. Routes — Бағыттар
+RouteID | INT | NULL NO | PK; IDENTITY(1,1) | Бағыттың нөмірі | 1
+FromCityID | INT | NULL NO | FK → Cities.CityID; UNIQUE топ: FromCityID, ToCityID | Жөнелту қаласына сілтеме | 1 = Астана
+ToCityID | INT | NULL NO | FK → Cities.CityID; UNIQUE топ: FromCityID, ToCityID | Жеткізу қаласына сілтеме | 2 = Шымкент
+DistanceKm | DECIMAL(10,2) | NULL NO | — | Оқу қашықтығы, км | 1500.00
+CHECK ([FromCityID]<>[ToCityID])
+CHECK ([DistanceKm]>(0))
+
+14. CargoTypes — Жүк түрлері
+CargoTypeID | INT | NULL NO | PK; IDENTITY(1,1) | Жүк түрінің нөмірі | 1
+Name | NVARCHAR(80) | NULL NO | UNIQUE | Атауы не клиент аты | Жалпы жүк
+Description | NVARCHAR(250) | NULL YES | — | Жүк не түр сипаттамасы | Қапталған оқу жабдығы
+CHECK (len(ltrim(rtrim([Name])))>(0))
+
+15. Tariffs — Тарифтер
+TariffID | INT | NULL NO | PK; IDENTITY(1,1) | Тарифтің нөмірі | 1
+Name | NVARCHAR(100) | NULL NO | — | Атауы не клиент аты | Стандарт · оқу үлгісі
+VehicleTypeID | INT | NULL NO | FK → VehicleTypes.VehicleTypeID | Көлік түрінің нөмірі | 1
+BasePrice | DECIMAL(14,2) | NULL NO | — | Бастапқы есептік баға, ₸ | 15000.00
+PricePerKm | DECIMAL(12,2) | NULL NO | — | Бір км үшін баға, ₸ | 120.00
+PricePerKg | DECIMAL(12,2) | NULL NO | — | Бір кг үшін баға, ₸ | 15.00
+IsActive | BIT | NULL NO | DEFAULT ((1)) | Қолдануға рұқсат белгісі | 1 = белсенді
+CHECK ([BasePrice]>=(0) AND [PricePerKm]>=(0) AND [PricePerKg]>=(0))
+CHECK (len(ltrim(rtrim([Name])))>(0))
+
+16. Orders — Тапсырыстар
+OrderID | INT | NULL NO | PK; IDENTITY(1,1) | Тапсырыстың нөмірі | 1
+OrderNumber | NVARCHAR(30) | NULL NO | UNIQUE | Сервер жасаған сыртқы бірегей нөмір | QZ- және UUID бөлігі
+ClientID | INT | NULL NO | FK → Clients.ClientID | Клиенттің ішкі нөмірі | 1
+RouteID | INT | NULL NO | FK → Routes.RouteID | Бағыттың нөмірі | 1
+TariffID | INT | NULL NO | FK → Tariffs.TariffID | Тарифтің нөмірі | 1
+OrderDate | DATETIME2(0) | NULL NO | DEFAULT (sysutcdatetime()) | Тапсырыс берілген сәт, UTC | 2026-10-18 12:00:00
+PickupDate | DATE | NULL NO | — | Жергілікті күнтізбедегі алу күні | 2026-11-20
+Status | NVARCHAR(20) | NULL NO | DEFAULT (N'New') | Жазбаның рұқсат етілген күйі | New, Confirmed, InTransit, Delivered, Cancelled
+Notes | NVARCHAR(500) | NULL YES | — | Тапсырысқа қосымша түсінік | Тиеу орнын келісу
+QuotedAmount | DECIMAL(14,2) | NULL NO | DEFAULT ((0)) | Сақталған тарихи баға, ₸ | 196503.75
+CHECK ([Status]=N'Cancelled' OR [Status]=N'Delivered' OR [Status]=N'InTransit' OR [Status]=N'Confirmed' OR [Status]=N'New')
+CHECK ([QuotedAmount]>=(0))
+CHECK (len(ltrim(rtrim([OrderNumber])))>(0))
+
+17. CargoItems — Жүк позициялары
+CargoItemID | INT | NULL NO | PK; IDENTITY(1,1) | Жүк позициясының ішкі нөмірі | 1
+OrderID | INT | NULL NO | FK → Orders.OrderID | Тапсырыстың нөмірі | 1
+CargoTypeID | INT | NULL NO | FK → CargoTypes.CargoTypeID | Жүк түрінің нөмірі | 1
+Description | NVARCHAR(200) | NULL NO | — | Жүк не түр сипаттамасы | Қапталған оқу жабдығы
+WeightKg | DECIMAL(12,2) | NULL NO | — | Позициядағы барлық қаптаманың салмағы, кг | 100.25
+VolumeM3 | DECIMAL(12,3) | NULL NO | — | Позицияның жалпы көлемі, м³ | 1.125
+Quantity | INT | NULL NO | — | Қаптама саны; салмаққа көбейтілмейді | 4
+CHECK ([WeightKg]>(0))
+CHECK ([VolumeM3]>(0))
+CHECK ([Quantity]>(0))
+CHECK (len(ltrim(rtrim([Description])))>(0))

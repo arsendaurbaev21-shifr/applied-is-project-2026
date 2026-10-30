@@ -1,0 +1,10 @@
+ROAD NETWORK DATA ATTRIBUTION AND LICENSES
+Road distances and the raw matrix response: © OpenStreetMap contributors, ODbL 1.0.
+https://www.openstreetmap.org/copyright
+https://opendatacommons.org/licenses/odbl/1-0/
+Routing calculation: OSRM, https://project-osrm.org/ ; driving profile on router.project-osrm.org.
+The bundled road-distance database is distributed under ODbL 1.0. Retain attribution and comply with its database share-alike terms when redistributing adapted road data. Application source code is separate from this data license.
+88 coordinate points: GeoNames, CC BY 4.0, https://www.geonames.org/ and https://creativecommons.org/licenses/by/4.0/ .
+2 coordinate points: Wikidata, CC0. Individual URLs are in kz_cities.json.
+Official city names, regions and KATO identifiers: Bureau of National Statistics of Kazakhstan, KATO dated 18 September 2026. Sources and independent regional-count audit: CITY_DATA_SOURCES.txt.
+The matrix has no live traffic, truck-specific or country-boundary exclusion rules. It is a dated driving-route snapshot.

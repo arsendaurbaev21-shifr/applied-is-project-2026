@@ -1,112 +1,87 @@
-# Қоймадағы тауарларды есепке алу ақпараттық жүйесі
+# QazCargo — зертханалық жұмыстар 1 және 2
 
-**Пән:** Ақпараттық жүйелердің қолданбалы бағдарламалық қамтамасыз етуі  
-**Автор:** Даурбаев Арсен  
-**Топ:** ИС-24А  
-**Кезең:** 1 және 2 зертханалық жұмыс
+**Даурбаев Арсен · ИС-24А**
 
-## 1. Пәндік аймақ
+Бұл репозиторий бұрын жасалған QazCargo жүк тасымалдау жүйесін жалғастырады.
+Негізгі сайт — Flask + SQL Server; зертханалық кеңейтім — FastAPI + SQLModel + Streamlit.
+Бастапқы веб-интерфейс, авторизация, жеткізу, карта және SQL миграциялары сақталған.
 
-Жүйе қоймадағы тауарларды категорияларға бөліп, олардың бағасын, қалдығын және жеткізушілерін сақтайды. Негізгі пайдаланушысы — қойма қызметкері. Бір тауарды бірнеше жеткізуші ұсына алады, ал бір жеткізуші бірнеше тауар жеткізеді. Осы кезеңде жоба құрылымы, деректер моделі және тестілік база дайын; толық CRUD пен пайдаланушы интерфейсі келесі зертханаларда жасалады.
+## Зертхананы іске қосу
 
-## 2. Деректер архитектурасы
+1. `LAB_SETUP.bat` — тәуелділіктерді орнатады және оқу базасын толтырады.
+2. `LAB_API.bat` — FastAPI: <http://127.0.0.1:8000/docs>.
+3. Басқа терезеде `LAB_UI.bat` — Streamlit: <http://127.0.0.1:8501>.
 
-![ER диаграммасы](docs/er_diagram.png)
+Негізгі QazCargo бұрынғыдай `START.bat` арқылы ашылады: <http://127.0.0.1:5000>.
+Оны алғаш орнату нұсқаулығы — [README_KZ.md](README_KZ.md).
 
-Схеманың өңделетін нұсқасы: [er_diagram.drawio](docs/er_diagram.drawio).
+Зертханалық модуль `labs/lab_1_2/database.db` файлын қолданады. Ондағы барлық
+клиенттер мен тапсырыстар — жасанды оқу мысалдары. Бұл файл SQL Server-дегі
+QazCargo базасымен синхрондалмайды және негізгі сайттың деректерін өзгертпейді.
+Базаны GitHub-тан жүктеудің қажеті жоқ: оны `seed.py` қайта жасайды.
 
-| Кесте | Мақсаты | Байланысы |
-|---|---|---|
-| category | Тауар категориялары | Category 1 → 0..N Item |
-| item | Артикул, атау, баға, қор қалдығы | Әр тауардың бір категориясы бар |
-| supplier | Жеткізуші және телефон | Supplier N ↔ M Item |
-| item_supplier | Тауар мен жеткізушіні байланыстыру | Екі сыртқы кілттен тұратын құрама PK |
-
-Баға `price_tiyn` бүтін санымен сақталады: 1 теңге = 100 тиын. Бұл ақшаны `float` арқылы сақтаудағы дәлдік мәселесін болдырмайды. Баға мен қалдыққа SQL `CHECK`, артикулға `UNIQUE`, байланыстарға сыртқы кілттер қойылған. SQLite байланысында `PRAGMA foreign_keys=ON` қосылады.
-
-## 3. Технологиялар
-
-Python 3.12, FastAPI, Uvicorn, SQLModel, SQLite, Streamlit, Git. Нақты тексерілген нұсқалар `requirements.txt` ішінде, барлық орнатылған тәуелділіктер `requirements-lock.txt` ішінде көрсетіледі. AI көмегімен құрылым, код және тексерулер әзірленді.
-
-## 4. Жоба құрылымы
+## Қосылған құрылым
 
 ```text
-app/
-  database/
-    models.py          # Төрт ORM кестесі және байланыстар
-    db.py              # SQLite engine, FK және Session
-  routers/items.py     # API маршруттарына арналған қаңқа
-  frontend/ui.py       # Streamlit бастапқы беті
-  main.py              # FastAPI кіру нүктесі
-docs/
-  er_diagram.png       # ER схемасы
-  er_diagram.drawio    # diagrams.net ішінде өңдеу
-  ai_prompts.txt       # Құрылым мен модельдерге сұраулар
-  verification.txt    # Нақты орындалған тексеру нәтижелері
-tests/test_database.py
-seed.py                # Қайта іске қосуға болатын seed
-verify_db.py           # Деректер мен байланыстарды тексеру
-requirements.txt
-requirements-lock.txt
-.gitignore
+backend/                    негізгі Flask сервері
+database/                   негізгі SQL Server схемасы және миграциялар
+web/                        негізгі QazCargo интерфейсі
+labs/lab_1_2/
+  database/models.py        SQLModel модельдері және Relationship
+  database/db.py            SQLite engine, init_db, session
+  routers/orders.py        оқу API маршрутизаторлары
+  main.py                   FastAPI қолданбасы
+  frontend.py               Streamlit интерфейсі
+  seed.py                   әр кестеге 3–5 жазба
+  verify_db.py              FK және байланыстарды тексеру
+  test_lab.py               оқшауланған автоматты тесттер
+docs/labs/                  ER, есеп, талаптар және тексеру нәтижесі
 ```
 
-## 5. Windows PowerShell арқылы іске қосу
+## Пәндік аймақ және байланыстар
 
-Жоба қалтасында Python 3.12 орнатылған ортада:
+Төрт негізгі нысан: **Clients, Orders, CargoTypes, CargoItems**.
+Clients → Orders — 1:N. Orders ↔ CargoTypes — CargoItems арқылы N:M.
+CargoItems салмақ, көлем және дана санын сақтайтын байланыс нысаны болып табылады.
+Бір тапсырыста бір жүк түрінің бірнеше позициясы болуы мүмкін, сондықтан оның жеке PK-і бар.
+`cargo_types` және `orders` көпке-көп ORM атрибуттары `viewonly=True`:
+жаңа позиция барлық міндетті өрістермен CargoItem арқылы қосылады.
+
+Бағыт пен тариф FK-ларын сақтау үшін төрт көмекші кесте енгізілген:
+Cities, Routes, VehicleTypes, Tariffs. Барлығы 8 оқу кестесі, 8 FK, 26 жазба.
+Бұл — негізгі жүйенің 19 кестелік схемасының оқу бөлігі. SQL Server триггерлері,
+тарифті қайта есептеу, толық мәртебе ауысу ережелері және аккаунттар бұл модульге көшірілмеген.
+API тек оқу операцияларын ұсынады. Оқу маршруттарының қашықтықтары шартты.
+
+![QazCargo оқу ER диаграммасы](docs/labs/qazcargo-er.png)
+
+## PowerShell командалары
+
+QazCargo түбірлік қалтасында:
 
 ```powershell
-python -m venv venv
-.\venv\Scripts\python.exe -m pip install -r requirements.txt
-.\venv\Scripts\python.exe seed.py
-.\venv\Scripts\python.exe verify_db.py
-.\venv\Scripts\python.exe -m unittest discover -s tests -v
+py -m venv .venv  # тек орта әлі жоқ болса
+.\.venv\Scripts\python.exe -m pip install -r requirements-labs.txt
+.\.venv\Scripts\python.exe -m labs.lab_1_2.seed
+.\.venv\Scripts\python.exe -m labs.lab_1_2.verify_db
+.\.venv\Scripts\python.exe -m unittest labs.lab_1_2.test_lab -v
+.\.venv\Scripts\python.exe -m uvicorn labs.lab_1_2.main:app --host 127.0.0.1 --port 8000
+# басқа терминалда
+.\.venv\Scripts\python.exe -m streamlit run labs/lab_1_2/frontend.py --server.address 127.0.0.1
 ```
 
-Ортаны белсендіру міндетті емес: жоғарыдағы командалар оның Python интерпретаторын тікелей қолданады. Қалауыңызша `.\venv\Scripts\Activate.ps1` орындауға болады. Орнатылған нұсқаларды толық қайталау үшін `pip install -r requirements-lock.txt` қолданыңыз.
+Seed бос базаны бір транзакциямен толтырады; толық базаға қайта орындалғанда
+жазбаларды қоспайды және өзгертпейді. Жартылай толтырылған база болса, қатемен тоқтайды.
+`echo=True` SQL сұрауларын консольде көрсетеді. Әр SQLite қосылымында FK тексеруі қосылады.
 
-Seed бірінші іске қосылғанда 3 категория, 3 жеткізуші, 4 тауар және 5 байланыс жасайды. Жеткізуші атаулары мен телефондар — оқу мысалы. Қайта іске қосу қайталанатын жазбалар жасамайды және бұрынғы баға мен қалдықты өзгертпейді. Скрипт жоқ үлгі жазбалар мен байланыстарды толықтырады; өндірістік деректерді жаңарту механизмі емес.
+## Зертханалық жұмыстардың нәтижесі
 
-`database.db` автоматты түрде жоба түбірінде жасалады. Ол Git пен тарату архивіне кірмейді. Барлық кестелер бір транзакцияда толтырылады. Модель өзгерсе, `create_all()` бұрынғы кестені жаңартпайды: кейінгі кезеңде миграциялар қажет.
+- 1-жұмыс: QazCargo тақырыбы, ER диаграммасы, VS Code ортасы, venv, GitHub, қабатты құрылым.
+- 2-жұмыс: SQLModel PK/FK, 1:N және N:M, init_db, seed, нақты SQLite файлы, тексерулер.
+- Толық есеп және бақылау сұрақтары: [docs/labs](docs/labs).
+- AI қолдану сұраулары: [ai-prompts.txt](docs/labs/ai-prompts.txt).
+- Бастапқы Flask жобасының нұсқаулығы: [README_KZ.md](README_KZ.md).
+- Тексеру: зертхананың 8 тесті және бастапқы жобаның 62 тесті өтті;
+  FastAPI HTTP және Streamlit AppTest сәтті. [Нәтижелер](docs/labs/verification.txt).
 
-Бастапқы қосымшаларды іске қосу:
-
-```powershell
-.\venv\Scripts\python.exe -m uvicorn app.main:app --reload
-# Басқа терминалда:
-.\venv\Scripts\python.exe -m streamlit run app/frontend/ui.py
-```
-
-API: http://localhost:8000/ және http://localhost:8000/docs  
-UI: http://localhost:8501
-
-## 6. VS Code және GitHub
-
-VS Code ішінде осы қалтаны ашып, `Python: Select Interpreter` арқылы `venv/Scripts/python.exe` таңдаңыз. Python мен Pylance орнатылған. AI кеңейтіміне ұсыныс `.vscode/extensions.json` ішінде бар. Copilot/Codeium кіруі қажет болса, өз аккаунтыңызбен кіріңіз. Осы жобада код AI көмегімен жасалып, жергілікті ортада тексерілді.
-
-Жергілікті Git тармағы: `codex/labs-1-2`. Екі зертхана бөлек коммиттермен белгіленеді. `venv`, `.env` және `*.db` Git-тен шығарылған.
-
-GitHub репозиторийі: [arsendaurbaev21-shifr/applied-is-project-2026](https://github.com/arsendaurbaev21-shifr/applied-is-project-2026). Басқа компьютерге көшіру:
-
-```powershell
-git clone https://github.com/arsendaurbaev21-shifr/applied-is-project-2026.git
-cd applied-is-project-2026
-```
-
-Одан кейін 5 бөлімдегі ортаны дайындау және seed командаларын орындаңыз. Қашықтағы негізгі тармақ — `main`. Бастапқы жергілікті жобадағы `codex/labs-1-2` тармағынан өзгерістер `git push origin HEAD:main` командасымен жіберіледі. ZIP архивінде `.git` тарихы болмайды; коммит тарихын сақтау үшін репозиторийді `git clone` арқылы көшіріңіз.
-
-## 7. Қорғауға дайындық
-
-- `category_id` — SQL кестесінде сақталатын сыртқы кілт; `category` — ORM объектілік байланысы.
-- `back_populates` байланыстың екі жағын сәйкестендіреді.
-- `ItemSupplier` құрама кілті бір тауар-жеткізуші жұбының қайталануын шектейді.
-- `Session` транзакцияны басқарады, `commit()` өзгерістерді базаға сақтайды.
-- `echo=True` орындалатын SQL-ды көрсетеді; `SQL_ECHO=0` орта айнымалысымен өшіруге болады.
-- `git commit` жергілікті тарихты, `git push` қашықтағы репозиторийді жаңартады.
-
-## 8. Дереккөздер
-
-- Тапсырма: берілген «ЛАБОРАТОРНАЯ РАБОТинструкцияИС.docx», ЛР 1 және ЛР 2.
-- [SQLModel Relationship](https://sqlmodel.tiangolo.com/tutorial/relationship-attributes/define-relationships-attributes/)
-- [SQLModel many-to-many](https://sqlmodel.tiangolo.com/tutorial/many-to-many/create-models-with-link/)
-- [SQLAlchemy SQLite foreign keys](https://docs.sqlalchemy.org/en/20/dialects/sqlite.html#foreign-key-support)
+`.env`, виртуалды орта, дерекқорлар, backup, ZIP және журналдар Git-ке қосылмайды.
