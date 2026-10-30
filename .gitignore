@@ -1,0 +1,19 @@
+# Python and local environment
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.env
+.env.*
+!.env.example
+# Generated local database and logs
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+*.log
+# IDE and OS files
+.idea/
+.DS_Store
+Thumbs.db
