@@ -86,14 +86,14 @@ VS Code ішінде осы қалтаны ашып, `Python: Select Interpreter
 
 Жергілікті Git тармағы: `codex/labs-1-2`. Екі зертхана бөлек коммиттермен белгіленеді. `venv`, `.env` және `*.db` Git-тен шығарылған.
 
-Қашықтағы репозиторийге жариялау аккаунт арқылы бөлек орындалады. GitHub-та `applied-is-project-2026` атауымен бос public репозиторий жасап, README мен gitignore-ды веб-сайтта қайта жасамаңыз: олар осы жобада дайын. URL-дегі YOUR_USERNAME орнын өз логиніңізбен ауыстырыңыз:
+GitHub репозиторийі: [arsendaurbaev21-shifr/applied-is-project-2026](https://github.com/arsendaurbaev21-shifr/applied-is-project-2026). Басқа компьютерге көшіру:
 
 ```powershell
-git remote add origin https://github.com/YOUR_USERNAME/applied-is-project-2026.git
-git push -u origin HEAD:main
+git clone https://github.com/arsendaurbaev21-shifr/applied-is-project-2026.git
+cd applied-is-project-2026
 ```
 
-Егер қашықтағы репозиторийде файлдар бар болса, алдымен олардың тарихын тексеріңіз; `--force` қолданбаңыз. ZIP архивін ашқанда `.git` қалтасы болмайды: бұл жағдайда `git init -b main`, `git add .`, `git commit -m "feat: complete labs 1 and 2"` командаларын алдымен орындаңыз. Бастапқы жергілікті жоба қалтасында коммит тарихы сақталған.
+Одан кейін 5 бөлімдегі ортаны дайындау және seed командаларын орындаңыз. Қашықтағы негізгі тармақ — `main`. Бастапқы жергілікті жобадағы `codex/labs-1-2` тармағынан өзгерістер `git push origin HEAD:main` командасымен жіберіледі. ZIP архивінде `.git` тарихы болмайды; коммит тарихын сақтау үшін репозиторийді `git clone` арқылы көшіріңіз.
 
 ## 7. Қорғауға дайындық
 
