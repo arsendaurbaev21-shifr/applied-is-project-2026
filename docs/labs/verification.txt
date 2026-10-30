@@ -1,0 +1,46 @@
+QazCargo — зертханалық жұмыстар 1 және 2
+Тексеру күні: 2026-10-30
+Орындаған: Даурбаев Арсен, ИС-24А
+
+Орта: Windows, Python 3.14.8, QazCargo/.venv
+FastAPI 0.162.0; SQLModel 0.0.48; SQLAlchemy 2.1.6;
+Uvicorn 0.54.0; Streamlit 1.66.1.
+pip check: No broken requirements found.
+
+python -m labs.lab_1_2.seed
+Cities=3, Routes=3, VehicleTypes=3, Tariffs=3,
+Clients=3, Orders=3, CargoTypes=3, CargoItems=5.
+Барлығы: 8 кесте, 26 жасанды жазба, 8 сыртқы кілт.
+
+python -m labs.lab_1_2.verify_db
+PRAGMA foreign_keys=1
+PRAGMA integrity_check=ok
+PRAGMA foreign_key_check=[]
+Clients -> Orders 1:N: OK
+Orders <-> CargoTypes N:M via CargoItems: OK
+
+python -m unittest labs.lab_1_2.test_lab -v
+Ran 8 tests: OK
+Кестелер/байланыстар, қайта seed, FK, теріс салмақ, байланысы бар клиентті
+өшіру, Decimal, қайталанған OrderNumber, API және 404/405 тексерілді.
+Starlette тест клиенті httpx қолданудың ескіретінін ескертеді;
+тесттер сәтті аяқталды. Бұл API орындалуына кедергі емес.
+
+Нақты localhost HTTP: PASS
+Streamlit AppTest: 3/3/3/5 көрсеткіштері, тапсырыс кестесі,
+екінші тапсырысты таңдағанда бір жүк позициясы көрсетіледі: PASS.
+
+Бастапқы QazCargo регрессиялық тексеруі:
+python -m pytest -q
+62 passed, 1 warning in 82.42s.
+Тесттер өздері жасаған бөлек QazCargo_Test_* SQL базаларында орындалды.
+Ескерту: backup тесті SQL Server backup қалтасында жасаған тестілік .bak
+файлын қызмет рұқсаттарына байланысты автоматты түрде өшіре алмады.
+
+Қолданыстағы backend, database және web ішіндегі 52 файлдың SHA256
+мәндері жұмыс алдындағы мәндермен бірдей.
+Барлық 8 оқу кестесінің баған атаулары docs/schema.json бастапқы
+SQL метадеректеріндегі бағандарға сәйкес келеді.
+
+Шекара: SQLite оқу модулі SQL Server триггерлерін және толық бизнес
+ережелерін алмастырмайды; өндірістік деректерге қосылмайды.
