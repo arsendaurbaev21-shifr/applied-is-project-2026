@@ -1,0 +1,29 @@
+TABLES: category, item, item_supplier, supplier
+category: 3
+supplier: 3
+item: 4
+item_supplier: 5
+FOREIGN_KEYS: 1
+FOREIGN_KEY_ERRORS: []
+INTEGRITY: ok
+
+SKU | Item | Category | Suppliers | Stock | Price KZT
+EL-001 | Пернетақта | Электроника | Demo Tech Supply, Demo Universal Trade | 12 | 14500.00
+HH-001 | Үстел шамы | Шаруашылық тауарлары | Demo Universal Trade | 8 | 8900.00
+OF-001 | A4 қағазы | Кеңсе тауарлары | Demo Office Market | 25 | 2500.00
+OF-002 | Дәптер | Кеңсе тауарлары | Demo Office Market | 40 | 450.00
+test_duplicate_sku_and_link_rejected (test_database.DatabaseTests.test_duplicate_sku_and_link_rejected) ... ok
+test_invalid_foreign_key_rejected (test_database.DatabaseTests.test_invalid_foreign_key_rejected) ... ok
+test_negative_values_rejected_by_database (test_database.DatabaseTests.test_negative_values_rejected_by_database) ... ok
+test_relationships_both_directions (test_database.DatabaseTests.test_relationships_both_directions) ... ok
+test_seed_is_repeatable_and_preserves_edits (test_database.DatabaseTests.test_seed_is_repeatable_and_preserves_edits) ... ok
+test_tables_and_seed_counts (test_database.DatabaseTests.test_tables_and_seed_counts) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.853s
+
+OK
+
+Dependency check: No broken requirements found.
+FastAPI skeleton: OK
+Streamlit skeleton: OK
