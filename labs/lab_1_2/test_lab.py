@@ -71,7 +71,7 @@ class LabTests(unittest.TestCase):
                 session.commit()
             session.rollback()
 
-    def test_api_matches_orm_and_is_read_only(self):
+    def test_api_matches_orm_and_validates_empty_create(self):
         def session_override():
             with Session(self.engine) as session:
                 yield session
@@ -86,7 +86,7 @@ class LabTests(unittest.TestCase):
             self.assertEqual(len(orders[0]["cargo_types"]), 2)
             self.assertEqual(client.get("/api/orders/1").status_code, 200)
             self.assertEqual(client.get("/api/orders/9999").status_code, 404)
-            self.assertEqual(client.post("/api/orders", json={}).status_code, 405)
+            self.assertEqual(client.post("/api/orders", json={}).status_code, 422)
             self.assertEqual(len(client.get("/api/clients").json()), 3)
         finally:
             client.close()
