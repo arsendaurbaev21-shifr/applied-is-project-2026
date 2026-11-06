@@ -1,1 +1,31 @@
-{"version":"2.0.0","tasks":[{"label":"QazCargo Start","type":"shell","command":".\\START.bat","problemMatcher":[]},{"label":"QazCargo SQL integration tests","type":"shell","command":".\\.venv\\Scripts\\python.exe -m pytest tests -v","problemMatcher":[]}]}
+{
+  "version": "2.0.0",
+  "tasks": [
+    {"label": "QazCargo Start", "type": "shell", "command": ".\\START.bat", "problemMatcher": []},
+    {"label": "QazCargo SQL integration tests", "type": "shell", "command": ".\\.venv\\Scripts\\python.exe -m pytest tests -v", "problemMatcher": []},
+    {
+      "label": "Labs: prepare demo database",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/Scripts/python.exe",
+      "args": ["-m", "labs.lab_1_2.seed"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Labs: verify database",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/Scripts/python.exe",
+      "args": ["-m", "labs.lab_1_2.verify_db"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Labs: run 26 tests",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/Scripts/python.exe",
+      "args": ["-m", "unittest", "labs.lab_1_2.test_lab", "labs.lab_1_2.test_crud", "-v"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    }
+  ]
+}

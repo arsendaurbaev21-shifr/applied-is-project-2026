@@ -47,3 +47,18 @@ Streamlit 3/3/3/5 көрсеткіштері және екінші тапсыр�
 Негізгі backend/database/web ішіндегі 52 файлдың SHA256 мәндері өзгермеді.
 Негізгі Flask/SQL Server-дің 62 тесті осы жолы қайта іске қосылған жоқ;
 олардың 2026-10-30 нәтижесі docs/labs/verification.txt ішінде.
+
+Musaev_Practica көшірмесіндегі іске қосу тексеруі — 2026-11-06
+VS Code Python интерпретаторы: жобаның .venv/Scripts/python.exe файлы.
+pip check: No broken requirements found.
+Flask, FastAPI, SQLModel, pyodbc, Streamlit импорттары: OK.
+Жаңа ортада 26 зертханалық тест қайта орындалды: 4.677s — OK.
+VS Code Problems: No problems have been detected in the workspace.
+launch.json және tasks.json JSON құрылымы тексерілді.
+Іске қосу конфигурацияларындағы модульдер мен аргументтер жеке процестерде тексерілді:
+- Cargo басты беті: HTTP 200; /api/health: ok=true, SQL Server-де 19 кесте.
+- FastAPI /docs: HTTP 200; /api/orders: 3 оқу тапсырысы.
+- Streamlit /_stcore/health: ok.
+- Streamlit AppTest: 3 клиент, 3 тапсырыс, 3 жүк түрі, 5 позиция; 2 кесте.
+Тексеруге қосылған серверлер тоқтатылды; порттар келесі іске қосуға босатылды.
+F5 нұсқаулығы мен қорғау сценарийі: docs/LABS_1_4_DEFENSE_KZ.txt.

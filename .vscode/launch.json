@@ -1,1 +1,40 @@
-{"version":"0.2.0","configurations":[{"name":"QazCargo Python + SQL Server","type":"debugpy","request":"launch","module":"backend.app","cwd":"${workspaceFolder}","console":"integratedTerminal","envFile":"${workspaceFolder}/.env"}]}
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "QazCargo Python + SQL Server",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "backend.app",
+      "python": "${workspaceFolder}/.venv/Scripts/python.exe",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env",
+      "env": {"PORT": "5000"},
+      "justMyCode": true
+    },
+    {
+      "name": "Labs 1-4: FastAPI (Swagger)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "uvicorn",
+      "python": "${workspaceFolder}/.venv/Scripts/python.exe",
+      "args": ["labs.lab_1_2.main:app", "--host", "127.0.0.1", "--port", "8000"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "preLaunchTask": "Labs: prepare demo database",
+      "justMyCode": true
+    },
+    {
+      "name": "Labs 1-4: Streamlit UI",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "streamlit",
+      "python": "${workspaceFolder}/.venv/Scripts/python.exe",
+      "args": ["run", "labs/lab_1_2/frontend.py", "--server.address", "127.0.0.1", "--server.port", "8501", "--server.headless", "true", "--browser.gatherUsageStats", "false"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ]
+}
