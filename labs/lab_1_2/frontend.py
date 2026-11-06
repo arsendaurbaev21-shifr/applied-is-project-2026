@@ -6,7 +6,7 @@ import streamlit as st
 
 st.set_page_config(page_title="QazCargo зертханасы", page_icon="🚚", layout="wide")
 st.title("QazCargo зертханалық модулі")
-st.caption("Даурбаев Арсен · ИС-24А · Зертханалық жұмыстар 1 және 2")
+st.caption("Даурбаев Арсен · ИС-24А · Зертханалық жұмыстар 1–4")
 st.info("Бұл бет бөлек оқу базасындағы жасанды деректерді көрсетеді.")
 
 
@@ -31,7 +31,8 @@ if not orders:
 else:
     st.subheader("Тасымалдау тапсырыстары")
     st.dataframe([{"Нөмір": o["number"], "Клиент": o["client"], "Бағыт": o["route"],
-                   "Жүк түрлері": ", ".join(o["cargo_types"]), "Мәртебе": o["status"]} for o in orders], hide_index=True)
+                   "Жүк түрлері": ", ".join(o["cargo_types"]), "Бағасы, ₸": o["quoted_amount"],
+                   "Мәртебе": o["status"]} for o in orders], hide_index=True)
     selected = st.selectbox("Тапсырыстың жүк құрамы", orders, format_func=lambda o: o["number"])
     st.dataframe(selected["items"], hide_index=True)
 st.link_button("API құжаттамасы", "http://127.0.0.1:8000/docs")

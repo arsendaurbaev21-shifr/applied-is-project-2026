@@ -1,0 +1,804 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "QazCargo зертханалық модулі",
+    "description": "Зертханалық жұмыстар 1–4. Оқу тапсырыстарының CRUD API-і. Тек бөлек SQLite базасы; SQL Server-дегі негізгі сайтқа қосылмайды.",
+    "version": "2.0.0"
+  },
+  "paths": {
+    "/api/summary": {
+      "get": {
+        "tags": [
+          "QazCargo оқу модулі"
+        ],
+        "summary": "Summary",
+        "operationId": "summary_api_summary_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/clients": {
+      "get": {
+        "tags": [
+          "QazCargo оқу модулі"
+        ],
+        "summary": "Clients",
+        "operationId": "clients_api_clients_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/orders": {
+      "get": {
+        "tags": [
+          "QazCargo оқу модулі"
+        ],
+        "summary": "Тапсырыстарды оқу және сүзгілеу",
+        "operationId": "orders_api_orders_get",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Search"
+            }
+          },
+          {
+            "name": "min_price",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "maximum": 999999999999.99,
+                  "minimum": 0.0
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Min Price"
+            }
+          },
+          {
+            "name": "max_price",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "maximum": 999999999999.99,
+                  "minimum": 0.0
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Max Price"
+            }
+          },
+          {
+            "name": "client_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "exclusiveMinimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Client Id"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "New",
+                    "Confirmed",
+                    "InTransit",
+                    "Delivered",
+                    "Cancelled"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 200,
+              "minimum": 1,
+              "default": 100,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrderRead"
+                  },
+                  "title": "Response Orders Api Orders Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "QazCargo оқу модулі"
+        ],
+        "summary": "Жаңа тапсырыс жасау",
+        "operationId": "create_order_api_orders_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/orders/{order_id}": {
+      "get": {
+        "tags": [
+          "QazCargo оқу модулі"
+        ],
+        "summary": "Тапсырысты ID арқылы оқу",
+        "operationId": "order_detail_api_orders__order_id__get",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Order Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "QazCargo оқу модулі"
+        ],
+        "summary": "Тапсырысты ішінара өзгерту",
+        "operationId": "update_order_api_orders__order_id__patch",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Order Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "QazCargo оқу модулі"
+        ],
+        "summary": "Тапсырысты жүк позицияларымен бірге өшіру",
+        "operationId": "delete_order_api_orders__order_id__delete",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Order Id"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Home",
+        "operationId": "home__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CargoItemCreate": {
+        "properties": {
+          "cargo_type_id": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Cargo Type Id"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Description"
+          },
+          "weight_kg": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Weight Kg",
+            "description": "Позицияның жалпы салмағы, кг; Quantity-ге көбейтілмейді"
+          },
+          "volume_m3": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Volume M3"
+          },
+          "quantity": {
+            "type": "integer",
+            "maximum": 2147483647.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Quantity"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "cargo_type_id",
+          "description",
+          "weight_kg",
+          "volume_m3",
+          "quantity"
+        ],
+        "title": "CargoItemCreate"
+      },
+      "CargoItemRead": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "cargo_type_id": {
+            "type": "integer",
+            "title": "Cargo Type Id"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "weight_kg": {
+            "type": "string",
+            "title": "Weight Kg"
+          },
+          "volume_m3": {
+            "type": "string",
+            "title": "Volume M3"
+          },
+          "quantity": {
+            "type": "integer",
+            "title": "Quantity"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "cargo_type_id",
+          "type",
+          "description",
+          "weight_kg",
+          "volume_m3",
+          "quantity"
+        ],
+        "title": "CargoItemRead"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "OrderCreate": {
+        "properties": {
+          "client_id": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Client Id"
+          },
+          "route_id": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Route Id"
+          },
+          "tariff_id": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Tariff Id"
+          },
+          "pickup_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Pickup Date"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CargoItemCreate"
+            },
+            "type": "array",
+            "maxItems": 100,
+            "minItems": 1,
+            "title": "Items"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "client_id",
+          "route_id",
+          "tariff_id",
+          "pickup_date",
+          "items"
+        ],
+        "title": "OrderCreate",
+        "examples": [
+          {
+            "client_id": 1,
+            "items": [
+              {
+                "cargo_type_id": 1,
+                "description": "Қапталған жүк",
+                "quantity": 2,
+                "volume_m3": "0.500",
+                "weight_kg": "10.00"
+              }
+            ],
+            "notes": "Зертханалық тапсырыс",
+            "pickup_date": "2026-11-20",
+            "route_id": 1,
+            "tariff_id": 1
+          }
+        ]
+      },
+      "OrderRead": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "number": {
+            "type": "string",
+            "title": "Number"
+          },
+          "client_id": {
+            "type": "integer",
+            "title": "Client Id"
+          },
+          "client": {
+            "type": "string",
+            "title": "Client"
+          },
+          "route_id": {
+            "type": "integer",
+            "title": "Route Id"
+          },
+          "route": {
+            "type": "string",
+            "title": "Route"
+          },
+          "tariff_id": {
+            "type": "integer",
+            "title": "Tariff Id"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "New",
+              "Confirmed",
+              "InTransit",
+              "Delivered",
+              "Cancelled"
+            ],
+            "title": "Status"
+          },
+          "pickup_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Pickup Date"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "quoted_amount": {
+            "type": "string",
+            "title": "Quoted Amount"
+          },
+          "cargo_types": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Cargo Types"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CargoItemRead"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "number",
+          "client_id",
+          "client",
+          "route_id",
+          "route",
+          "tariff_id",
+          "status",
+          "pickup_date",
+          "created_at",
+          "notes",
+          "quoted_amount",
+          "cargo_types",
+          "items"
+        ],
+        "title": "OrderRead"
+      },
+      "OrderUpdate": {
+        "properties": {
+          "client_id": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client Id"
+          },
+          "route_id": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Route Id"
+          },
+          "tariff_id": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tariff Id"
+          },
+          "pickup_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pickup Date"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "items": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/CargoItemCreate"
+                },
+                "type": "array",
+                "maxItems": 100,
+                "minItems": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Items"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "OrderUpdate",
+        "examples": [
+          {
+            "notes": "Алушыға алдын ала хабарласу"
+          }
+        ]
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

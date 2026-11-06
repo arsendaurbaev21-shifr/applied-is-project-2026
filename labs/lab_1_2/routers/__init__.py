@@ -1,1 +1,1 @@
-"""Read-only endpoints for synthetic lab data."""
+"""CRUD endpoints for synthetic QazCargo lab data."""

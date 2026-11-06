@@ -1,1 +1,1 @@
-"""Labs 1–2: isolated SQLModel prototype of QazCargo's order domain."""
+"""Labs 1–4: SQLModel order domain and CRUD API in the original lab package."""

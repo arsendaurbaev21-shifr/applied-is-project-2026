@@ -20,7 +20,8 @@ def seed_demo(engine):
     with Session(engine) as session:
         existing = counts(session)
         if any(existing.values()):
-            if all(existing[name] >= n for name, n in EXPECTED.items()):
+            # Labs 3–4 allow order CRUD: never recreate intentionally deleted orders.
+            if all(existing[name] >= n for name, n in EXPECTED.items() if name not in {"Orders", "CargoItems"}):
                 return {"inserted": False, "counts": existing}
             raise RuntimeError("Оқу базасы жартылай толтырылған. Seed деректерді өзгертпеді.")
         cities = [City(Name=name) for name in ("Алматы", "Астана", "Шымкент")]

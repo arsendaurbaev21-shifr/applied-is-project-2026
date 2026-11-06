@@ -70,3 +70,14 @@ def create_order(data: OrderCreate, response: Response, session: Session = Depen
     order = services.create_order(session, data)
     response.headers["Location"] = f"/api/orders/{order.OrderID}"
     return order_view(order)
+
+
+@router.patch("/orders/{order_id}", response_model=OrderRead, summary="Тапсырысты ішінара өзгерту")
+def update_order(order_id: int, data: OrderUpdate, session: Session = Depends(get_session)):
+    return order_view(services.update_order(session, order_id, data))
+
+
+@router.delete("/orders/{order_id}", status_code=204, summary="Тапсырысты жүк позицияларымен бірге өшіру")
+def delete_order(order_id: int, session: Session = Depends(get_session)):
+    services.delete_order(session, order_id)
+    return Response(status_code=204)

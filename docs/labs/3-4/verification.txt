@@ -1,0 +1,49 @@
+QazCargo — зертханалық жұмыстар 3 және 4
+Даурбаев Арсен, ИС-24А
+Тексеру күні: 2026-11-06
+
+python -m unittest labs.lab_1_2.test_lab labs.lab_1_2.test_crud -v
+Ran 26 tests in 1.379s — OK (8 бұрынғы + 18 жаңа).
+Тесттер әрқайсысы бөлек SQLite :memory: базасында орындалады.
+Starlette httpx тест клиентінің болашақта ескіретінін ескертеді;
+бұл ескерту орындалу нәтижесіне әсер етпеді.
+
+Тексерілген келісімдер:
+- POST 201, Location, серверлік ID/нөмір/уақыт/мәртебе және Decimal баға;
+- теріс/NaN/тым дәл салмақ, бос сипаттама, қате күн, bool quantity: 422;
+- ID, баға, нөмір, мәртебе, уақытты клиенттің өзгертуі: 422;
+- жоқ FK: 422; тапсырыс пен жүк жартылай сақталмайды;
+- сынақ триггері INSERT-ті бұзғанда: 409 және толық rollback;
+- PATCH бір өрісті өзгертеді, қалған жауап өрістері дәл сақталады;
+- omitted/null ажыратылды: notes=null рұқсат, міндетті өрістерге null: 422;
+- items алмастыруы және бағаны қайта есептеу;
+- қате PATCH бұрынғы Notes пен CargoItems жазбаларын өзгертпейді;
+- DELETE 204, бос дене, физикалық Orders/CargoItems өшірілуі;
+- кейінгі GET/PATCH/DELETE: 404;
+- search, min_price/max_price, client_id/status, offset/limit;
+- %, _, SQL енгізу үлгісі жай bind-параметр ретінде қабылданады;
+- теріс/кері диапазон, NaN, жарамсыз limit/status: 422;
+- New емес тапсырыс және белсенді емес тариф: 409;
+- Swagger/OpenAPI схемалары;
+- CRUD-тан кейін seed жойылған тапсырысты қайта құрмайды; verify_db өтеді.
+
+Нақты Swagger UI тексеруі
+Іске қосу: python -m tools.lab_api_sandbox --port 8001
+URL: http://127.0.0.1:8001/docs
+База: TemporaryDirectory ішіндегі бөлек sandbox.db.
+1. POST weight_kg=-10.00 -> 422; items/0/weight_kg greater_than.
+2. POST weight_kg=10.00 -> 201; ID 4, LAB-65544D84CB1243459F64;
+   quoted_amount=165150.00; Location=/api/orders/4.
+3. PATCH ID 4 notes -> 200; ескерту өзгерді, баға 165150.00 сақталды.
+4. GET search=LAB-65544D84, min_price=165000, max_price=166000
+   -> 200; тек ID 4, жаңарған Notes қайтарылды.
+5. DELETE ID 4 -> 204, жауап денесі бос.
+6. PATCH сол ID 4 -> 404, «Тапсырыс табылмады».
+Скриншоттар: swagger-post.jpg, swagger-delete.jpg, swagger-404.jpg.
+
+Қосымша тексеру
+Нақты localhost FastAPI HTTP + Streamlit AppTest: PASS.
+Streamlit 3/3/3/5 көрсеткіштері және екінші тапсырысты таңдау: PASS.
+Негізгі backend/database/web ішіндегі 52 файлдың SHA256 мәндері өзгермеді.
+Негізгі Flask/SQL Server-дің 62 тесті осы жолы қайта іске қосылған жоқ;
+олардың 2026-10-30 нәтижесі docs/labs/verification.txt ішінде.
