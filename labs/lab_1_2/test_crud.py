@@ -178,7 +178,7 @@ class CRUDTests(unittest.TestCase):
         self.assertEqual(self.client.get("/docs").status_code, 200)
         spec = self.client.get("/openapi.json").json()
         self.assertIn("201", spec["paths"]["/api/orders"]["post"]["responses"])
-        self.assertEqual(set(spec["paths"]["/api/orders/{order_id}"]), {"get", "patch", "delete"})
+        self.assertEqual(set(spec["paths"]["/api/orders/{order_id}"]), {"get", "put", "patch", "delete"})
         self.assertNotIn("content", spec["paths"]["/api/orders/{order_id}"]["delete"]["responses"]["204"])
         props = spec["components"]["schemas"]["OrderCreate"]["properties"]
         self.assertNotIn("id", props)

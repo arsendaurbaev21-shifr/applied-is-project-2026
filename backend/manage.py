@@ -21,7 +21,7 @@ def admin_console():
     mail=prompt_value('Әкімші email: ',email,'Email қате. @ белгісі бар толық адрес енгізіңіз, мысалы: name@example.com')
     name=prompt_value('Аты-жөніңіз: ',lambda value:string(value,120),'Аты-жөніңіз бос болмауы және 120 таңбадан аспауы керек.')
     while True:
-        secret=prompt_value('Пароль (10–128 таңба): ',password,'Пароль ұзындығы 10–128 таңба болуы керек.',hidden=True)
+        secret=prompt_value('Пароль (10–128 таңба): ',password,'10–128 таңбадан тұратын бірегей сөз тіркесін қолданыңыз; өте оңай және қайталанатын пароль қабылданбайды.',hidden=True)
         if secret==getpass('Парольді қайталаңыз: '): break
         print('Парольдер сәйкес келмейді. Қайта енгізіңіз.')
     hashed=generate_password_hash(secret,method='scrypt')

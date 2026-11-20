@@ -23,6 +23,10 @@ jobs:
         run: python -m pip install -r requirements-lab-test.txt
       - name: API and Streamlit regression tests
         run: python -m pytest -q --junitxml=qa/pytest.xml
+      - name: Static security check of the lab module
+        run: |
+          python -m pip install bandit==1.9.4
+          python -m bandit -r labs/lab_1_2 -x labs/lab_1_2/test_lab.py,labs/lab_1_2/test_crud.py -f json -o qa/bandit.json
       - name: Validate Compose
         run: docker compose config --quiet
       - name: Build and start both containers
@@ -32,6 +36,8 @@ jobs:
           docker compose exec -T frontend python -c "import requests; r=requests.get('http://backend:8000/health',timeout=5); r.raise_for_status(); assert r.json()['status']=='ok'; print('Service DNS and HTTP: PASS')"
       - name: Exercise API and save a persistence marker
         run: python tools/check_lab_http.py create --state qa/persistence.json
+      - name: Lab 8 real HTTP integration matrix
+        run: python tools/check_lab8_http.py --output qa/lab8-http.json
       - name: Recreate containers while preserving the volume
         run: |
           docker compose down
@@ -50,6 +56,8 @@ jobs:
           name: lab-verification
           path: |
             qa/pytest.xml
+            qa/bandit.json
+            qa/lab8-http.json
             qa/compose-status.txt
             qa/compose-logs.txt
       - name: Remove the disposable CI stack

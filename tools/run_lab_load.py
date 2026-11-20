@@ -20,6 +20,18 @@ from decimal import Decimal
 ROOT=Path(__file__).resolve().parents[1]
 
 
+def stop_owned_process(process):
+    """Windows venv python.exe is a launcher; also stop the child interpreter."""
+    if process.poll() is None:
+        descendants=psutil.Process(process.pid).children(recursive=True)
+        for child in reversed(descendants):
+            try: child.terminate()
+            except psutil.NoSuchProcess: pass
+        process.terminate()
+        psutil.wait_procs(descendants,timeout=10)
+    process.wait(timeout=15)
+
+
 def main():
     import argparse
     parser=argparse.ArgumentParser()
@@ -65,13 +77,16 @@ def main():
                     samples=[]
                     with prefix.with_suffix('.log').open('w',encoding='utf-8') as output:
                         runner=subprocess.Popen(command,cwd=ROOT,stdout=output,stderr=output,creationflags=creationflags)
-                        process.cpu_percent()
+                        monitored=[process,*process.children(recursive=True)]
+                        for member in monitored: member.cpu_percent()
                         try:
                             while runner.poll() is None:
-                                samples.append({'time':time.time(),'cpu_percent':process.cpu_percent(interval=1),
-                                                'rss_mb':process.memory_info().rss/1024**2})
+                                time.sleep(1)
+                                samples.append({'time':time.time(),
+                                                'cpu_percent':sum(member.cpu_percent() for member in monitored),
+                                                'rss_mb':sum(member.memory_info().rss for member in monitored)/1024**2})
                         finally:
-                            if runner.poll() is None: runner.terminate();runner.wait(timeout=15)
+                            if runner.poll() is None: stop_owned_process(runner)
                     (args.output/f'users-{users}-resources.json').write_text(json.dumps(samples,indent=2),encoding='utf-8')
                     with Path(str(prefix)+'_stats.csv').open(encoding='utf-8') as handle:
                         total=next(row for row in csv.DictReader(handle) if row['Name']=='Aggregated')
@@ -87,10 +102,10 @@ def main():
                     (args.output/'summary.json').write_text(json.dumps({'environment':{
                         'os':platform.platform(),'python':platform.python_version(),'logical_cpus':psutil.cpu_count(),
                         'ram_gb':round(psutil.virtual_memory().total/1024**3,2),'workers':1,'orders':200,
-                        'wait_s':[.5,1.5],'cpu_note':'Server process; 100% equals one logical CPU. Load generator shares host.'},
+                        'wait_s':[.5,1.5],'cpu_note':'Server process tree; 100% equals one logical CPU. Load generator shares host.'},
                         'results':results},indent=2),encoding='utf-8')
             finally:
-                server.terminate();server.wait(timeout=15)
+                stop_owned_process(server)
     return 1 if any(r['exit_code'] or r['failures'] for r in results) else 0
 
 

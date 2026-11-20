@@ -1,5 +1,6 @@
 // All product text is translated. User-entered SQL data remains unchanged.
 const text = {
+ password_weak:['Бұл құпиясөз тым оңай. Ұзын әрі бірегей сөз тіркесін қолданыңыз.','Этот пароль слишком простой. Используйте длинную уникальную фразу.','This password is too easy to guess. Use a long, unique passphrase.'],
  brandSub:['Жүк тасымалдауды басқару','Управление грузоперевозками','Cargo management'],
  home:['Басты бет','Главная','Home'],routes:['Бағыттар','Маршруты','Routes'],services:['Қызметтер','Услуги','Services'],how:['Қалай жұмыс істейді','Как это работает','How it works'],login:['Кіру','Войти','Sign in'],cabinet:['Жеке кабинет','Личный кабинет','My account'],adminLogin:['Әкімшіге кіру','Вход администратора','Administrator sign in'],
  heroTag:['ҚАЗАҚСТАН БОЙЫНША ЖҮК ТАСЫМАЛЫ','ГРУЗОПЕРЕВОЗКИ ПО КАЗАХСТАНУ','ROAD FREIGHT IN KAZAKHSTAN'],

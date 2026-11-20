@@ -155,7 +155,7 @@ def edit_form(api):
 def main():
     st.set_page_config(page_title="QazCargo зертханасы", page_icon="🚚", layout="wide")
     st.title("QazCargo · Жүк тасымалдау")
-    st.caption("Даурбаев Арсен · ИС-24А · Зертханалық жұмыстар 1–7")
+    st.caption("Даурбаев Арсен · ИС-24А · Зертханалық жұмыстар 1–8")
     if "goto_page" in st.session_state:
         st.session_state["page"] = st.session_state.pop("goto_page")
         st.session_state["search"] = st.session_state.pop("next_search", "")

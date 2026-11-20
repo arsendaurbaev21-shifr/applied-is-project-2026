@@ -55,6 +55,8 @@ def email(value):
 
 def password(value):
     require(isinstance(value,str) and 10 <= len(value) <= 128, 'password_length', field='Password')
+    common={'password123','1234567890','qwerty12345','qwertyuiop','admin12345','12345678910'}
+    require(value.casefold() not in common and len(set(value)) >= 4, 'password_weak', field='Password')
     return value
 
 
