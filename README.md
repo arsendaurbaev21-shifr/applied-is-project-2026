@@ -239,6 +239,7 @@ Git тарихында нақты күндер көрсетілген; жеті 
 
 - [5–7 Word есебі](docs/labs/5-7/QazCargo_Labs_5_7_Daurbaev_Arsen.docx)
 - [7 және 8 зертхананың біріктірілген Word есебі](docs/labs/7-8/QazCargo_Labs_7_8_Daurbaev_Arsen.docx)
+- [7 және 8 зертхананың қысқаша есебі және қорғау мәтіні](docs/labs/7-8/QazCargo_Labs_7_8_Simple_Daurbaev_Arsen.docx)
 - [Нақты тексеру нәтижелері](docs/labs/5-7/verification.txt)
 - [Код шолуы](docs/labs/5-7/review.txt)
 - [15 бақылау сұрағының жауабы](docs/labs/5-7/control-questions.txt)
