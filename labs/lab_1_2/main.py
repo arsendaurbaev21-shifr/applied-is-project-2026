@@ -1,6 +1,8 @@
 from contextlib import asynccontextmanager
 import os
 from fastapi import Depends, FastAPI
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 from sqlmodel import Session, select
 from .database.db import engine, get_session, init_db
 from .routers.orders import router
@@ -16,8 +18,8 @@ def create_app(database_engine=engine, *, seed_on_start=False):
         yield
 
 
-    app = FastAPI(title="QazCargo зертханалық модулі", version="3.0.0", lifespan=lifespan,
-                  description="Зертханалық жұмыстар 1–7. Оқу тапсырыстарының CRUD API-і. "
+    app = FastAPI(title="QazCargo зертханалық модулі", version="4.0.0", lifespan=lifespan,
+                  description="Зертханалық жұмыстар 1–8. Оқу тапсырыстарының CRUD API-і. "
                               "Тек бөлек SQLite базасы; SQL Server-дегі негізгі сайтқа қосылмайды.")
     if database_engine is not engine:
         def local_session():
@@ -25,6 +27,13 @@ def create_app(database_engine=engine, *, seed_on_start=False):
                 yield session
         app.dependency_overrides[get_session] = local_session
     app.include_router(router)
+
+    @app.exception_handler(RequestValidationError)
+    async def invalid_request(request, error):
+        # Do not echo input values (including unknown password/token fields) to the response.
+        details = [{key: item[key] for key in ("type", "loc", "msg")} for item in error.errors()]
+        status = 400 if any(item["type"] == "json_invalid" for item in details) else 422
+        return JSONResponse(status_code=status, content={"detail": details})
 
     @app.get("/health", tags=["Health"])
     def health(session: Session = Depends(get_session)):
@@ -34,7 +43,7 @@ def create_app(database_engine=engine, *, seed_on_start=False):
 
     @app.get("/")
     def home():
-        return {"project": "QazCargo", "labs": [1, 2, 3, 4, 5, 6, 7], "docs": "/docs", "data": "synthetic"}
+        return {"project": "QazCargo", "labs": list(range(1, 9)), "docs": "/docs", "data": "synthetic"}
     return app
 
 

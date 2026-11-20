@@ -1,7 +1,7 @@
 name: QazCargo labs tests and Docker
 on:
   push:
-    branches: [main, 'codex/labs-5-7']
+    branches: [main, 'codex/labs-5-7', 'codex/lab-8']
   pull_request:
   workflow_dispatch:
 permissions:

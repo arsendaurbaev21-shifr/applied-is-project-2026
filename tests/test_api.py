@@ -41,9 +41,9 @@ def test_invalid_post_does_not_change_summary(lab_client):
 
 def test_health_and_final_openapi(lab_client):
     assert lab_client.get('/health').json() == {'status': 'ok'}
-    assert lab_client.get('/').json()['labs'] == list(range(1, 8))
+    assert lab_client.get('/').json()['labs'] == list(range(1, 9))
     assert lab_client.get('/docs').status_code == 200
     paths = lab_client.get('/openapi.json').json()['paths']
     assert {'get', 'post'} <= paths['/api/orders'].keys()
-    assert {'get', 'patch', 'delete'} <= paths['/api/orders/{order_id}'].keys()
+    assert {'get', 'put', 'patch', 'delete'} <= paths['/api/orders/{order_id}'].keys()
     assert '/api/catalogs' in paths

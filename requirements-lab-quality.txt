@@ -1,0 +1,4 @@
+-r requirements-lab-test.txt
+locust==2.47.0
+bandit==1.9.4
+psutil==7.2.2

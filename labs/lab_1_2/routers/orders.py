@@ -1,9 +1,10 @@
 from decimal import Decimal
 from fastapi import APIRouter, Depends, HTTPException, Query, Response
 from sqlalchemy import or_
+from sqlalchemy.orm import joinedload, selectinload
 from sqlmodel import Session, select
 from ..database.db import get_session
-from ..database.models import CargoType, Client, Order, Route, Tariff
+from ..database.models import CargoItem, CargoType, Client, Order, Route, Tariff
 from ..seed import counts
 from ..schemas import OrderCreate, OrderRead, OrderStatus, OrderUpdate
 from .. import services
@@ -59,7 +60,14 @@ def orders(session: Session = Depends(get_session), search: str | None = Query(d
            offset: int = Query(default=0, ge=0), limit: int = Query(default=100, ge=1, le=200)):
     if min_price is not None and max_price is not None and min_price > max_price:
         raise HTTPException(422, "min_price max_price мәнінен үлкен болмауы тиіс")
-    query = select(Order).join(Client)
+    # Fetch related rows in three SELECTs instead of two extra SELECTs per order.
+    query = select(Order).join(Client).options(
+        joinedload(Order.client),
+        joinedload(Order.route).joinedload(Route.origin),
+        joinedload(Order.route).joinedload(Route.destination),
+        selectinload(Order.items).joinedload(CargoItem.cargo_type),
+        selectinload(Order.cargo_types),
+    )
     if search and search.strip():
         term = search.strip()
         query = query.where(or_(Order.OrderNumber.contains(term, autoescape=True), Client.Name.contains(term, autoescape=True)))
@@ -90,6 +98,13 @@ def create_order(data: OrderCreate, response: Response, session: Session = Depen
 @router.patch("/orders/{order_id}", response_model=OrderRead, summary="Тапсырысты ішінара өзгерту")
 def update_order(order_id: int, data: OrderUpdate, session: Session = Depends(get_session)):
     return order_view(services.update_order(session, order_id, data))
+
+
+@router.put("/orders/{order_id}", response_model=OrderRead, summary="Тапсырыстың енгізілетін өрістерін толық алмастыру")
+def replace_order(order_id: int, data: OrderCreate, session: Session = Depends(get_session)):
+    # Identity, created_at and status remain server-controlled. Omitted notes become null.
+    replacement = OrderUpdate.model_validate(data.model_dump())
+    return order_view(services.update_order(session, order_id, replacement))
 
 
 @router.delete("/orders/{order_id}", status_code=204, summary="Тапсырысты жүк позицияларымен бірге өшіру")
