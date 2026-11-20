@@ -4,16 +4,16 @@ import re
 import secrets
 from pathlib import Path
 import pytest
-from werkzeug.security import generate_password_hash
-from backend.app import create_app
-from backend.db import connect,transaction
-from backend.install import consume
 
 ROOT=Path(__file__).resolve().parents[1]
 
 
 @pytest.fixture(scope='session')
 def test_database():
+    from dotenv import load_dotenv
+    from backend.db import connect
+    from backend.install import consume
+    load_dotenv(ROOT / '.env')
     name='QazCargo_Test_'+secrets.token_hex(6)
     original=os.environ.get('DB_DATABASE','QazCargo')
     conn=connect('master',True)
@@ -54,11 +54,15 @@ class Actor:
 
 
 @pytest.fixture
-def app(test_database):return create_app({'TESTING':True})
+def app(test_database):
+    from backend.app import create_app
+    return create_app({'TESTING':True})
 
 
 @pytest.fixture
 def actors(app):
+    from werkzeug.security import generate_password_hash
+    from backend.db import transaction
     secret=secrets.token_urlsafe(18)
     mail='admin-'+secrets.token_hex(5)+'@test.invalid'
     with transaction(True) as q:
@@ -85,3 +89,38 @@ def order_data(**overrides):
 def new_order(client,**overrides):
     response=client.post('/orders',order_data(**overrides));assert response.status_code==201,response.json
     return response.json['id']
+
+
+@pytest.fixture
+def lab_client():
+    from fastapi.testclient import TestClient
+    from labs.lab_1_2.database.db import make_engine
+    from labs.lab_1_2.main import create_app
+    from labs.lab_1_2.seed import seed_demo
+    engine = make_engine(':memory:')
+    seed_demo(engine)
+    try:
+        with TestClient(create_app(engine)) as client:
+            yield client
+    finally:
+        engine.dispose()
+
+
+@pytest.fixture
+def ui_backend(lab_client, monkeypatch):
+    """Exercise real API/database behavior from Streamlit without a TCP port."""
+    import requests
+    from labs.lab_1_2 import ui_client
+
+    def send(method, url, *, params=None, json=None, timeout=None):
+        from urllib.parse import urlsplit
+        response = lab_client.request(method, urlsplit(url).path, params=params, json=json)
+        result = requests.Response()
+        result.status_code = response.status_code
+        result._content = response.content
+        result.headers.update(response.headers)
+        result.url = url
+        return result
+
+    monkeypatch.setattr(ui_client.requests, 'request', send)
+    return lab_client
