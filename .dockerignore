@@ -1,0 +1,13 @@
+**
+!Dockerfile
+!Dockerfile.frontend
+!requirements-lab-api.txt
+!requirements-lab-ui.txt
+!labs/
+!labs/**
+labs/**/__pycache__/
+labs/**/*.pyc
+labs/**/*.db
+labs/**/*.db-*
+labs/**/*.sqlite*
+labs/**/.env*

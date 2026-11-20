@@ -1,11 +1,12 @@
 """Only a dedicated SQLite file; no production .env or SQL Server connection."""
 from pathlib import Path
+import os
 from sqlalchemy import event
 from sqlalchemy.pool import StaticPool
 from sqlmodel import Session, SQLModel, create_engine
 from . import models  # Register all model tables before create_all.
 
-DATABASE_PATH = Path(__file__).resolve().parents[1] / "database.db"
+DATABASE_PATH = Path(os.getenv("LAB_DATABASE_PATH", str(Path(__file__).resolve().parents[1] / "database.db")))
 
 
 def make_engine(path=DATABASE_PATH, *, echo=False):
