@@ -238,7 +238,7 @@ JUnit және контейнер журналдары run ішіндегі `lab
 Git тарихында нақты күндер көрсетілген; жеті аптаға жасанды коммиттер жасалған жоқ.
 
 - [5–7 Word есебі](docs/labs/5-7/QazCargo_Labs_5_7_Daurbaev_Arsen.docx)
-- [7 зертхананың жеке Word есебі](docs/labs/7/QazCargo_Lab_7_Daurbaev_Arsen.docx)
+- [7 және 8 зертхананың біріктірілген Word есебі](docs/labs/7-8/QazCargo_Labs_7_8_Daurbaev_Arsen.docx)
 - [Нақты тексеру нәтижелері](docs/labs/5-7/verification.txt)
 - [Код шолуы](docs/labs/5-7/review.txt)
 - [15 бақылау сұрағының жауабы](docs/labs/5-7/control-questions.txt)
@@ -291,7 +291,7 @@ CPU — API процесс ағашы (100% = бір логикалық CPU); RA
 GitHub Actions pytest, Bandit, Docker build, нақты HTTP және volume persistence тексеруін орындайды.
 Production-ға автоматты жариялау қосылған жоқ.
 
-- [8 зертхананың Word есебі](docs/labs/8/QazCargo_Lab_8_Daurbaev_Arsen.docx)
+- [7 және 8 зертхананың біріктірілген Word есебі](docs/labs/7-8/QazCargo_Labs_7_8_Daurbaev_Arsen.docx)
 - [Архитектура](docs/labs/8/architecture.md), [жүктеме графиктері](docs/labs/8/load-chart.png)
 - [Нақты HTTP жауаптары](docs/labs/8/http-results.json), [тексеру нәтижесі](docs/labs/8/verification.txt)
 - [Қауіпсіздік шолуы және шектеулері](docs/labs/8/security-review.txt)
