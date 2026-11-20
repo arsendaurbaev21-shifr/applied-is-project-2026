@@ -14,7 +14,7 @@
       "justMyCode": true
     },
     {
-      "name": "Labs 1-4: FastAPI (Swagger)",
+      "name": "Labs 1-7: FastAPI (Swagger)",
       "type": "debugpy",
       "request": "launch",
       "module": "uvicorn",
@@ -26,7 +26,7 @@
       "justMyCode": true
     },
     {
-      "name": "Labs 1-4: Streamlit UI",
+      "name": "Labs 1-7: Streamlit UI",
       "type": "debugpy",
       "request": "launch",
       "module": "streamlit",

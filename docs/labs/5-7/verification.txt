@@ -1,0 +1,35 @@
+QazCargo — 5–7 зертхананы тексеру
+Күні: 2026-11-20. Даурбаев Арсен, ИС-24А.
+
+Жергілікті орта: Windows, Python 3.14.8, оқшауланған SQLite.
+Команда: .venv\Scripts\python.exe -m pytest -q
+Нәтиже: 45 passed, 29 subtests passed, 1 warning in 22.28s.
+Ескерту: Starlette TestClient/httpx deprecation; тест қатесі емес.
+Алдыңғы 26 тест сақталды, 19 жаңа тест қосылды.
+AppTest: іздеу/баға, екі жүк позициясын жасау, бос сипаттаманы қабылдамау,
+ескертуді өзгерту, растаусыз DELETE-ті тоқтату, растаумен DELETE, backend offline.
+
+Нақты браузер және TCP: уақытша SQLite, API 8001, Streamlit 8502.
+LAB-2026-002 іздеуі: 1 нәтиже.
+Оқу жабдығы тапсырысы: POST 201, баға 165150.00, жаңа жазба бірден тізімде.
+Нөмірі LAB-BF934200EC3641B5BA8D; тек уақытша тексеру базасында.
+OpenAPI JSON алынған. Браузер дәлелі: streamlit-created.jpg.
+
+Жергілікті компьютерде Docker Desktop табылмады.
+Сондықтан контейнерлер нақты GitHub Actions Ubuntu runner-де тексерілді:
+https://github.com/arsendaurbaev21-shifr/applied-is-project-2026/actions/runs/44680216039
+Commit: 1ab990eecd2e16a15f25011a6b83b9be33fbea61
+Job: 136101533557. Conclusion: success.
+CI pytest: 45 passed, 29 subtests passed in 3.34s; 1 warning.
+Екі образ жиналды; екі контейнер healthy.
+Frontend -> backend DNS/HTTP: PASS.
+Нақты HTTP create/PATCH/search/validation: PASS.
+down -> up кейін named volume дерегі өзгеріссіз сақталды: PASS.
+Тек тексеру жазбасын DELETE -> кейінгі GET 404: PASS.
+CI JUnit және журнал артефакті: 14602889540.
+Шикі журналдан қысқа үзінді: ci-log-excerpt.txt.
+
+Негізгі Flask/SQL Server жүйесінің коды бұл кезеңде өзгертілген жоқ;
+оның интеграциялық тесттері 5–7 кезеңінде қайта орындалған жоқ.
+Бұрыннан жергілікті қалтада жоқ болған 22 сурет Git-тен өшірілмеді.
+Нақты күндегі коммиттер қолданылды, жеті апталық жалған тарих жасалмады.

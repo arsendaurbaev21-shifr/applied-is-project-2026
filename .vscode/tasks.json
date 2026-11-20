@@ -20,10 +20,10 @@
       "problemMatcher": []
     },
     {
-      "label": "Labs: run 26 tests",
+      "label": "Labs: run pytest tests",
       "type": "process",
       "command": "${workspaceFolder}/.venv/Scripts/python.exe",
-      "args": ["-m", "unittest", "labs.lab_1_2.test_lab", "labs.lab_1_2.test_crud", "-v"],
+      "args": ["-m", "pytest", "-q"],
       "options": {"cwd": "${workspaceFolder}"},
       "problemMatcher": []
     }
