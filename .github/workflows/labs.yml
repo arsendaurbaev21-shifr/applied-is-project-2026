@@ -28,7 +28,8 @@ jobs:
       - name: Build and start both containers
         run: docker compose up --build -d --wait --wait-timeout 180
       - name: Verify container networking
-        run: docker compose exec -T frontend python -c "import requests; r=requests.get('http://backend:8000/health',timeout=5); r.raise_for_status(); assert r.json()['status']=='ok'; print('Service DNS and HTTP: PASS')"
+        run: |
+          docker compose exec -T frontend python -c "import requests; r=requests.get('http://backend:8000/health',timeout=5); r.raise_for_status(); assert r.json()['status']=='ok'; print('Service DNS and HTTP: PASS')"
       - name: Exercise API and save a persistence marker
         run: python tools/check_lab_http.py create --state qa/persistence.json
       - name: Recreate containers while preserving the volume
