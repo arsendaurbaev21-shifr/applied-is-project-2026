@@ -238,6 +238,7 @@ JUnit және контейнер журналдары run ішіндегі `lab
 Git тарихында нақты күндер көрсетілген; жеті аптаға жасанды коммиттер жасалған жоқ.
 
 - [5–7 Word есебі](docs/labs/5-7/QazCargo_Labs_5_7_Daurbaev_Arsen.docx)
+- [7 зертхананың жеке Word есебі](docs/labs/7/QazCargo_Lab_7_Daurbaev_Arsen.docx)
 - [Нақты тексеру нәтижелері](docs/labs/5-7/verification.txt)
 - [Код шолуы](docs/labs/5-7/review.txt)
 - [15 бақылау сұрағының жауабы](docs/labs/5-7/control-questions.txt)
