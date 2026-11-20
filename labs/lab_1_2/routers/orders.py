@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query, Response
 from sqlalchemy import or_
 from sqlmodel import Session, select
 from ..database.db import get_session
-from ..database.models import Client, Order
+from ..database.models import CargoType, Client, Order, Route, Tariff
 from ..seed import counts
 from ..schemas import OrderCreate, OrderRead, OrderStatus, OrderUpdate
 from .. import services
@@ -34,6 +34,21 @@ def summary(session: Session = Depends(get_session)):
 def clients(session: Session = Depends(get_session)):
     return [{"id": c.ClientID, "name": c.Name, "order_count": len(c.orders)}
             for c in session.exec(select(Client).order_by(Client.ClientID)).all()]
+
+
+@router.get("/catalogs", summary="Формаға арналған клиенттер, бағыттар, тарифтер және жүк түрлері")
+def catalogs(session: Session = Depends(get_session)):
+    return {
+        "clients": [{"id": row.ClientID, "name": row.Name}
+                    for row in session.exec(select(Client).order_by(Client.ClientID)).all()],
+        "routes": [{"id": row.RouteID, "name": f"{row.origin.Name} → {row.destination.Name}",
+                    "distance_km": str(row.DistanceKm)}
+                   for row in session.exec(select(Route).order_by(Route.RouteID)).all()],
+        "tariffs": [{"id": row.TariffID, "name": row.Name, "active": row.IsActive}
+                    for row in session.exec(select(Tariff).order_by(Tariff.TariffID)).all()],
+        "cargo_types": [{"id": row.CargoTypeID, "name": row.Name}
+                        for row in session.exec(select(CargoType).order_by(CargoType.CargoTypeID)).all()],
+    }
 
 
 @router.get("/orders", response_model=list[OrderRead], summary="Тапсырыстарды оқу және сүзгілеу")
