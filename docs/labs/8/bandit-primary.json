@@ -1,0 +1,632 @@
+{
+  "errors": [],
+  "generated_at": "2026-11-20T05:36:57Z",
+  "metrics": {
+    "_totals": {
+      "CONFIDENCE.HIGH": 5,
+      "CONFIDENCE.LOW": 13,
+      "CONFIDENCE.MEDIUM": 2,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 5,
+      "SEVERITY.MEDIUM": 15,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 1222,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "backend\\__init__.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 1,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "backend\\app.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 95,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "backend\\auth.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 2,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 2,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 105,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "backend\\db.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 1,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 1,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 71,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "backend\\delivery.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 65,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "backend\\documents.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 2,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 2,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 198,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "backend\\errors.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 7,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "backend\\install.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 84,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "backend\\manage.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 49,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "backend\\migrate.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 20,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "backend\\network.py": {
+      "CONFIDENCE.HIGH": 5,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 5,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 40,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "backend\\portal.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 7,
+      "CONFIDENCE.MEDIUM": 2,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 9,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 228,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "backend\\schema.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 72,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "backend\\service.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 62,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "backend\\share.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 20,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "backend\\usability.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 1,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 1,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 105,
+      "nosec": 0,
+      "skipped_tests": 0
+    }
+  },
+  "results": [
+    {
+      "code": "16 def current_user(q):\n17     user=q.one(f'SELECT {PUBLIC_USER} FROM dbo.Users WHERE UserID=?',(session.get('uid',0),))\n18     if not user or not user['IsActive'] or user['AuthVersion']!=session.get('version'):\n",
+      "col_offset": 17,
+      "end_col_offset": 24,
+      "filename": "backend\\auth.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 17,
+      "line_range": [
+        17
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "65         uid=q.insert('Users','UserID',dict(Email=mail,FullName=name,PasswordHash=hashed,Role='client',ClientID=cid))\n66         user=q.one(f'SELECT {PUBLIC_USER} FROM dbo.Users WHERE UserID=?',(uid,))\n67     establish(user)\n",
+      "col_offset": 21,
+      "end_col_offset": 28,
+      "filename": "backend\\auth.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 66,
+      "line_range": [
+        66
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "54         names = ','.join('['+k+']' for k in values)\n55         return self.scalar(f'SET NOCOUNT ON; DECLARE @ids TABLE(ID int); INSERT dbo.[{table}] ({names}) '\n56                            f'OUTPUT inserted.[{pk}] INTO @ids VALUES ({\",\".join(\"?\" for _ in values)}); SELECT ID FROM @ids;', values.values())\n57 \n",
+      "col_offset": 29,
+      "end_col_offset": 85,
+      "filename": "backend\\db.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 55,
+      "line_range": [
+        55,
+        56
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "169     where+=(' AND ' if where else ' WHERE ')+'DocumentID=?'\n170     row=g.q.one('SELECT '+META+(',Content' if content else '')+' FROM dbo.Documents'+where,(*params,did))\n171     require(row,'not_found',404)\n",
+      "col_offset": 16,
+      "end_col_offset": 25,
+      "filename": "backend\\documents.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 170,
+      "line_range": [
+        170
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "183         where+=(' AND ' if where else ' WHERE ')+'(Title LIKE ? OR OriginalName LIKE ?)'; values.extend(['%'+request.args['search'][:160]+'%']*2)\n184     return jsonify(rows=g.q.rows('SELECT '+META+' FROM dbo.Documents'+where+' ORDER BY DocumentID DESC',values))\n185 \n",
+      "col_offset": 33,
+      "end_col_offset": 42,
+      "filename": "backend\\documents.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 184,
+      "line_range": [
+        184
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "10     network=json.loads((DATA/'kz_road_network.json').read_text(encoding='utf-8'))\n11     assert len(cities)==90 and len({c['name'] for c in cities})==90\n12     assert network['cityIds']==[c['sourceId'] for c in cities]\n",
+      "col_offset": 4,
+      "end_col_offset": 67,
+      "filename": "backend\\network.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 11,
+      "line_range": [
+        11
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "11     assert len(cities)==90 and len({c['name'] for c in cities})==90\n12     assert network['cityIds']==[c['sourceId'] for c in cities]\n13     assert len(network['distances'])==90\n",
+      "col_offset": 4,
+      "end_col_offset": 62,
+      "filename": "backend\\network.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 12,
+      "line_range": [
+        12
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "12     assert network['cityIds']==[c['sourceId'] for c in cities]\n13     assert len(network['distances'])==90\n14     for i,row in enumerate(network['distances']):\n",
+      "col_offset": 4,
+      "end_col_offset": 40,
+      "filename": "backend\\network.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 13,
+      "line_range": [
+        13
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "14     for i,row in enumerate(network['distances']):\n15         assert len(row)==90\n16         for j,d in enumerate(row):\n",
+      "col_offset": 8,
+      "end_col_offset": 27,
+      "filename": "backend\\network.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 15,
+      "line_range": [
+        15
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "16         for j,d in enumerate(row):\n17             assert isinstance(d,(float,int)) and math.isfinite(d) and (d==0 if i==j else d>0)\n18     return cities,network\n",
+      "col_offset": 12,
+      "end_col_offset": 93,
+      "filename": "backend\\network.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 17,
+      "line_range": [
+        17
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "19     names=CATALOGS if private else ['Cities','Routes','VehicleTypes','CargoTypes','Tariffs']\n20     return {name:q.rows(f'SELECT * FROM dbo.[{name}]'+(' WHERE IsActive=1' if name=='Tariffs' and not private else '')+f' ORDER BY [{CATALOGS[name][0]}]') for name in names}\n21 \n",
+      "col_offset": 26,
+      "end_col_offset": 45,
+      "filename": "backend\\portal.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 20,
+      "line_range": [
+        20
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "45     if record_id:\n46         require(g.q.scalar(f'SELECT [{pk}] FROM dbo.[{table}] WHERE [{pk}]=?',(record_id,)),'not_found',404)\n47     if request.method=='DELETE': g.q.execute(f'DELETE dbo.[{table}] WHERE [{pk}]=?',(record_id,))\n",
+      "col_offset": 29,
+      "end_col_offset": 37,
+      "filename": "backend\\portal.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 46,
+      "line_range": [
+        46
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "51         if record_id:\n52             g.q.execute(f'UPDATE dbo.[{table}] SET '+','.join('['+f+']=?' for f in values)+f' WHERE [{pk}]=?',(*values.values(),record_id))\n53             if table=='Clients':\n",
+      "col_offset": 26,
+      "end_col_offset": 38,
+      "filename": "backend\\portal.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 52,
+      "line_range": [
+        52
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "103     date_filter(where,values,'v.OrderDate',request.args)\n104     rows=g.q.rows('SELECT v.* FROM dbo.v_OrderOverview v'+where_sql(where)+' ORDER BY v.OrderID DESC',values)\n105     active=[r for r in rows if r['Status']!='Cancelled']\n",
+      "col_offset": 18,
+      "end_col_offset": 57,
+      "filename": "backend\\portal.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 104,
+      "line_range": [
+        104
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "110     counts={state:0 for state in STATES}\n111     for r in g.q.rows('SELECT v.Status,COUNT(*) AS N FROM dbo.v_OrderOverview v'+where_sql(cw)+' GROUP BY v.Status',cv):counts[r['Status']]=r['N']\n112     return jsonify(rows=rows,totals=totals,statusCounts=counts)\n",
+      "col_offset": 22,
+      "end_col_offset": 80,
+      "filename": "backend\\portal.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 111,
+      "line_range": [
+        111
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "142     values=delivery_values(data)\n143     g.q.execute('UPDATE dbo.Orders SET '+','.join('['+key+']=?' for key in values)+' WHERE OrderID=?',(*values.values(),oid))\n144     notify_order(g.q,oid,'delivery_updated')\n",
+      "col_offset": 16,
+      "end_col_offset": 40,
+      "filename": "backend\\portal.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 143,
+      "line_range": [
+        143
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "164         values=cargo_values(request.get_json())\n165         if cid: g.q.execute('UPDATE dbo.CargoItems SET '+','.join('['+k+']=?' for k in values)+' WHERE CargoItemID=?',(*values.values(),cid))\n166         else: cid=g.q.insert('CargoItems','CargoItemID',dict(OrderID=oid,**values))\n",
+      "col_offset": 28,
+      "end_col_offset": 56,
+      "filename": "backend\\portal.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 165,
+      "line_range": [
+        165
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "201 def tickets():\n202     return jsonify(rows=g.q.rows('SELECT t.*,u.FullName FROM dbo.SupportTickets t JOIN dbo.Users u ON u.UserID=t.UserID'+\n203         ('' if g.user['Role']=='admin' else ' WHERE t.UserID=?')+' ORDER BY t.UpdatedAt DESC,t.TicketID DESC',() if g.user['Role']=='admin' else (g.user['UserID'],)))\n204 \n",
+      "col_offset": 33,
+      "end_col_offset": 120,
+      "filename": "backend\\portal.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 202,
+      "line_range": [
+        202,
+        203
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "257         date_filter(where,values,'p.PaidAt',request.args)\n258         rows=g.q.rows('SELECT p.PaymentID,o.OrderNumber,c.Name AS ClientName,p.Amount,p.PaidAt,p.Method,p.Note FROM dbo.Payments p JOIN dbo.Orders o ON o.OrderID=p.OrderID JOIN dbo.Clients c ON c.ClientID=o.ClientID'+where_sql(where)+' ORDER BY p.PaidAt,p.PaymentID',values)\n259         totals={'Amount':sum((r['Amount'] for r in rows),Decimal(0))}\n",
+      "col_offset": 22,
+      "end_col_offset": 216,
+      "filename": "backend\\portal.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 258,
+      "line_range": [
+        258
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    },
+    {
+      "code": "24     params=[pattern]*4+([g.user['ClientID']] if scope else [])\n25     orders=g.q.rows('''SELECT TOP(12) OrderID,OrderNumber,ClientName,FromCity,ToCity,Status\n26         FROM dbo.v_OrderOverview WHERE (OrderNumber LIKE ? OR ClientName LIKE ? OR FromCity LIKE ? OR ToCity LIKE ?)'''+scope+' ORDER BY OrderID DESC',params)\n27     clients=[];routes=[];cities=[]\n",
+      "col_offset": 20,
+      "end_col_offset": 119,
+      "filename": "backend\\usability.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 89,
+        "link": "https://cwe.mitre.org/data/definitions/89.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Possible SQL injection vector through string-based query construction.",
+      "line_number": 25,
+      "line_range": [
+        25,
+        26
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b608_hardcoded_sql_expressions.html",
+      "test_id": "B608",
+      "test_name": "hardcoded_sql_expressions"
+    }
+  ]
+}

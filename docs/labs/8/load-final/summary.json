@@ -1,0 +1,73 @@
+{
+  "environment": {
+    "os": "Windows-11-10.0.26300-SP0",
+    "python": "3.14.8",
+    "logical_cpus": 8,
+    "ram_gb": 7.7,
+    "workers": 1,
+    "orders": 200,
+    "wait_s": [
+      0.5,
+      1.5
+    ],
+    "cpu_note": "Server process tree; 100% equals one logical CPU. Load generator shares host."
+  },
+  "results": [
+    {
+      "users": 5,
+      "duration_s": 60,
+      "requests": 286,
+      "failures": 0,
+      "avg_ms": 14.658186360835456,
+      "p95_ms": 26.0,
+      "p99_ms": 82.0,
+      "rps": 4.8874934341560134,
+      "exit_code": 0,
+      "cpu_avg_percent": 5.6245901639344265,
+      "cpu_max_percent": 12.5,
+      "rss_max_mb": 97.5703125
+    },
+    {
+      "users": 20,
+      "duration_s": 120,
+      "requests": 2344,
+      "failures": 0,
+      "avg_ms": 15.560365655779705,
+      "p95_ms": 28.0,
+      "p99_ms": 100.0,
+      "rps": 19.690459187294763,
+      "exit_code": 0,
+      "cpu_avg_percent": 19.910655737704918,
+      "cpu_max_percent": 37.5,
+      "rss_max_mb": 94.28125
+    },
+    {
+      "users": 50,
+      "duration_s": 180,
+      "requests": 8762,
+      "failures": 0,
+      "avg_ms": 19.761242764354957,
+      "p95_ms": 39.0,
+      "p99_ms": 89.0,
+      "rps": 49.13136638653058,
+      "exit_code": 0,
+      "cpu_avg_percent": 47.4510989010989,
+      "cpu_max_percent": 100.0,
+      "rss_max_mb": 101.36328125
+    },
+    {
+      "users": 100,
+      "duration_s": 180,
+      "requests": 16820,
+      "failures": 0,
+      "avg_ms": 60.36560618342565,
+      "p95_ms": 220.0,
+      "p99_ms": 560.0,
+      "rps": 94.24054155061013,
+      "exit_code": 0,
+      "cpu_avg_percent": 105.3521978021978,
+      "cpu_max_percent": 198.3,
+      "rss_max_mb": 110.53125
+    }
+  ]
+}

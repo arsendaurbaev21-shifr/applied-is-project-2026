@@ -1,0 +1,13 @@
+GitHub Actions regression failure before the fix
+Run: https://github.com/arsendaurbaev21-shifr/applied-is-project-2026/actions/runs/44682189147
+Commit: 8739acbc5958440e985bb0bab051bf417706c945
+Two tests exposed weak passwords accepted by the old length-only validator.
+One earlier OpenAPI contract assertion required updating for the newly added PUT method.
+No failure was hidden or marked xfail; the next commit fixes the validator and the contract.
+
+2026-11-20T05:37:23.9021825Z E       Failed: DID NOT RAISE AppError
+2026-11-20T05:37:23.9025282Z E       Failed: DID NOT RAISE AppError
+2026-11-20T05:37:23.9033238Z FAILED tests/test_lab8_password.py::test_weak_password_rejected[password123] - Failed: DID NOT RAISE AppError
+2026-11-20T05:37:23.9033789Z FAILED tests/test_lab8_password.py::test_weak_password_rejected[1111111111] - Failed: DID NOT RAISE AppError
+2026-11-20T05:37:23.9034405Z FAILED labs/lab_1_2/test_crud.py::CRUDTests::test_swagger_and_openapi_contract - AssertionError: Items in the first set but not the second:
+2026-11-20T05:37:23.9035064Z 3 failed, 62 passed, 1 warning, 29 subtests passed in 5.11s

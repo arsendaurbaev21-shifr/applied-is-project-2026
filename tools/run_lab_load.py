@@ -35,7 +35,7 @@ def stop_owned_process(process):
 def main():
     import argparse
     parser=argparse.ArgumentParser()
-    parser.add_argument('--output',type=Path,default=ROOT/'docs/labs/8/load')
+    parser.add_argument('--output',type=Path,default=ROOT/'qa/load')
     parser.add_argument('--port',type=int,default=8018)
     args=parser.parse_args()
     args.output.mkdir(parents=True,exist_ok=True)

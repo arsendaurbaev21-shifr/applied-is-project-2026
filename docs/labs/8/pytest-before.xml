@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="20" time="2.772" timestamp="2026-11-20T10:36:24.568553+05:00" hostname="Arsen"><testcase classname="tests.test_lab8_integration" name="test_full_crud_with_put_and_persistent_identity" time="0.097" /><testcase classname="tests.test_lab8_integration" name="test_put_requires_all_input_fields" time="0.033" /><testcase classname="tests.test_lab8_integration" name="test_malformed_json_is_400_and_does_not_echo_input" time="0.039" /><testcase classname="tests.test_lab8_integration" name="test_empty_or_incomplete_body_does_not_change_database[body0]" time="0.048" /><testcase classname="tests.test_lab8_integration" name="test_empty_or_incomplete_body_does_not_change_database[None]" time="0.066" /><testcase classname="tests.test_lab8_integration" name="test_empty_or_incomplete_body_does_not_change_database[body2]" time="0.054" /><testcase classname="tests.test_lab8_integration" name="test_nonexistent_client_reference_is_rejected" time="0.041" /><testcase classname="tests.test_lab8_integration" name="test_sql_injection_like_search_is_literal" time="0.112" /><testcase classname="tests.test_lab8_integration" name="test_error_response_and_logs_do_not_contain_extra_secret" time="0.031" /><testcase classname="tests.test_lab8_integration" name="test_create_transaction_rolls_back_after_database_failure" time="0.067" /><testcase classname="tests.test_lab8_integration" name="test_replace_transaction_restores_old_items_after_failure" time="0.066" /><testcase classname="tests.test_lab8_integration" name="test_list_query_count_does_not_grow_with_orders" time="0.276" /><testcase classname="tests.test_lab8_integration" name="test_price_boundaries_from_real_api[0.01-165000.15]" time="0.040" /><testcase classname="tests.test_lab8_integration" name="test_price_boundaries_from_real_api[10.00-165150.00]" time="0.048" /><testcase classname="tests.test_lab8_integration" name="test_zero_weight_rejected" time="0.032" /><testcase classname="tests.test_lab8_password" name="test_weak_password_rejected[]" time="0.001" /><testcase classname="tests.test_lab8_password" name="test_weak_password_rejected[123456789]" time="0.000" /><testcase classname="tests.test_lab8_password" name="test_weak_password_rejected[password123]" time="0.001"><failure message="Failed: DID NOT RAISE AppError">value = 'password123'
+
+    @pytest.mark.parametrize('value',['','123456789','password123','1111111111'])
+    def test_weak_password_rejected(value):
+&gt;       with pytest.raises(AppError): password(value)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE AppError
+
+tests\test_lab8_password.py:9: Failed</failure></testcase><testcase classname="tests.test_lab8_password" name="test_weak_password_rejected[1111111111]" time="0.001"><failure message="Failed: DID NOT RAISE AppError">value = '1111111111'
+
+    @pytest.mark.parametrize('value',['','123456789','password123','1111111111'])
+    def test_weak_password_rejected(value):
+&gt;       with pytest.raises(AppError): password(value)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE AppError
+
+tests\test_lab8_password.py:9: Failed</failure></testcase><testcase classname="tests.test_lab8_password" name="test_long_passphrase_accepted" time="0.000" /></testsuite></testsuites>

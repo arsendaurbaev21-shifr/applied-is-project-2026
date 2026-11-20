@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="650" height="255" preserveAspectRatio="xMinYMin meet" viewBox="0 0 650 255" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="650" height="255"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-255)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="0" y="0" width="650" height="255" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="10" y="235" style="font-family: Arial; font-size: 14px;fill: rgb(9%,12%,16%); stroke:none;" transform="translate(0,470) scale(1,-1)">Оқу модулі</text>
+			<rect x="10" y="158" width="165" height="55" rx="5" ry="0" style="stroke: rgb(27%,33%,41%); stroke-linecap: butt; stroke-width: 1; fill: rgb(92%,94%,96%); fill-rule: evenodd;"/>
+			<text x="20" y="191" style="font-family: Arial; font-size: 13px;fill: rgb(9%,12%,16%); stroke:none;" transform="translate(0,382) scale(1,-1)">Streamlit</text>
+			<text x="20" y="171" style="font-family: Arial; font-size: 10px;fill: rgb(9%,12%,16%); stroke:none;" transform="translate(0,342) scale(1,-1)">requests HTTP және JSON</text>
+			<rect x="225" y="158" width="165" height="55" rx="5" ry="0" style="stroke: rgb(27%,33%,41%); stroke-linecap: butt; stroke-width: 1; fill: rgb(92%,94%,96%); fill-rule: evenodd;"/>
+			<text x="235" y="191" style="font-family: Arial; font-size: 13px;fill: rgb(9%,12%,16%); stroke:none;" transform="translate(0,382) scale(1,-1)">FastAPI</text>
+			<text x="235" y="171" style="font-family: Arial; font-size: 10px;fill: rgb(9%,12%,16%); stroke:none;" transform="translate(0,342) scale(1,-1)">Pydantic және SQLModel</text>
+			<rect x="440" y="158" width="195" height="55" rx="5" ry="0" style="stroke: rgb(27%,33%,41%); stroke-linecap: butt; stroke-width: 1; fill: rgb(92%,94%,96%); fill-rule: evenodd;"/>
+			<text x="450" y="191" style="font-family: Arial; font-size: 13px;fill: rgb(9%,12%,16%); stroke:none;" transform="translate(0,382) scale(1,-1)">SQLite</text>
+			<text x="450" y="171" style="font-family: Arial; font-size: 10px;fill: rgb(9%,12%,16%); stroke:none;" transform="translate(0,342) scale(1,-1)">Жеке файл және volume</text>
+			<path d="M 175,185 L 220,185 Z" style="stroke: rgb(20%,25%,33%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<polygon points="220 185, 213 189, 213 181" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(20%,25%,33%); fill-rule: evenodd;"/>
+			<path d="M 390,185 L 435,185 Z" style="stroke: rgb(20%,25%,33%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<polygon points="435 185, 428 189, 428 181" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(20%,25%,33%); fill-rule: evenodd;"/>
+			<text x="10" y="132" style="font-family: Arial; font-size: 11px;fill: rgb(9%,12%,16%); stroke:none;" transform="translate(0,264) scale(1,-1)">Тесттер   AppTest → TestClient → DB     Locust → нақты HTTP</text>
+			<text x="10" y="101" style="font-family: Arial; font-size: 14px;fill: rgb(9%,12%,16%); stroke:none;" transform="translate(0,202) scale(1,-1)">Бастапқы Cargo жүйесі</text>
+			<rect x="10" y="23" width="165" height="55" rx="5" ry="0" style="stroke: rgb(27%,33%,41%); stroke-linecap: butt; stroke-width: 1; fill: rgb(92%,94%,96%); fill-rule: evenodd;"/>
+			<text x="20" y="56" style="font-family: Arial; font-size: 13px;fill: rgb(9%,12%,16%); stroke:none;" transform="translate(0,112) scale(1,-1)">Веб интерфейс</text>
+			<text x="20" y="36" style="font-family: Arial; font-size: 10px;fill: rgb(9%,12%,16%); stroke:none;" transform="translate(0,72) scale(1,-1)">Cookie және CSRF</text>
+			<rect x="225" y="23" width="165" height="55" rx="5" ry="0" style="stroke: rgb(27%,33%,41%); stroke-linecap: butt; stroke-width: 1; fill: rgb(92%,94%,96%); fill-rule: evenodd;"/>
+			<text x="235" y="56" style="font-family: Arial; font-size: 13px;fill: rgb(9%,12%,16%); stroke:none;" transform="translate(0,112) scale(1,-1)">Flask</text>
+			<text x="235" y="36" style="font-family: Arial; font-size: 10px;fill: rgb(9%,12%,16%); stroke:none;" transform="translate(0,72) scale(1,-1)">AuthVersion және рөлдер</text>
+			<rect x="440" y="23" width="195" height="55" rx="5" ry="0" style="stroke: rgb(27%,33%,41%); stroke-linecap: butt; stroke-width: 1; fill: rgb(92%,94%,96%); fill-rule: evenodd;"/>
+			<text x="450" y="56" style="font-family: Arial; font-size: 13px;fill: rgb(9%,12%,16%); stroke:none;" transform="translate(0,112) scale(1,-1)">SQL Server</text>
+			<text x="450" y="36" style="font-family: Arial; font-size: 10px;fill: rgb(9%,12%,16%); stroke:none;" transform="translate(0,72) scale(1,-1)">Уақытша тест базасы</text>
+			<path d="M 175,50 L 220,50 Z" style="stroke: rgb(20%,25%,33%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<polygon points="220 50, 213 54, 213 46" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(20%,25%,33%); fill-rule: evenodd;"/>
+			<path d="M 390,50 L 435,50 Z" style="stroke: rgb(20%,25%,33%); stroke-linecap: butt; stroke-width: 1.5;"/>
+			<polygon points="435 50, 428 54, 428 46" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(20%,25%,33%); fill-rule: evenodd;"/>
+		</g>
+	</g>
+</svg>

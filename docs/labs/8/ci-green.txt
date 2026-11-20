@@ -1,0 +1,12 @@
+Actual GitHub Actions output after fixes
+Run: https://github.com/arsendaurbaev21-shifr/applied-is-project-2026/actions/runs/44682645025
+Commit: c6f3faee45281e919e28ad044e27d89899b9663c
+Job: 136109451864
+Conclusion: success
+
+2026-11-20T05:41:37.9241403Z 65 passed, 1 warning, 29 subtests passed in 6.33s
+2026-11-20T05:42:39.4395988Z Service DNS and HTTP: PASS
+2026-11-20T05:42:39.6144775Z HTTP create / PATCH / search / validation: PASS; persistence marker saved.
+2026-11-20T05:42:39.8078926Z 10 real HTTP checks passed; evidence: qa/lab8-http.json
+2026-11-20T05:42:52.3442176Z Persistence after recreation / DELETE / subsequent 404: PASS; marker removed.
+2026-11-20T05:42:53.4320809Z Artifact download URL: https://github.com/arsendaurbaev21-shifr/applied-is-project-2026/actions/runs/44682645025/artifacts/14604164791

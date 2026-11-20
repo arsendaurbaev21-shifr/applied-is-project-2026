@@ -1,0 +1,8 @@
+..............................................................           [100%]
+============================== warnings summary ===============================
+tests/test_integration.py::test_real_backup_verify_disposable_database
+  C:\Users\ASUS VivoBook\OneDrive\Documents\ChatGPT\Desctop\Musaev_Practica\tests\test_integration.py:249: UserWarning: SQL service backup retained for administrator cleanup: C:\Program Files\Microsoft SQL Server\MSSQL17.MSSQLSERVER\MSSQL\Backup\QazCargo_Test_73db51caedb1.bak
+    warnings.warn('SQL service backup retained for administrator cleanup: '+str(file))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+62 passed, 1 warning in 116.83s (0:01:56)

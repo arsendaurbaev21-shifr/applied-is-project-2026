@@ -1,0 +1,122 @@
+QazCargo Lab 8 — actual verification, 2026-11-20
+Author: Даурбаев Арсен, ИС-24А.
+
+Local default pytest: 65 passed, 29 subtests passed, 1 warning in 11.94s.
+New lab 8 cases: 20 default tests + 10 real SQL Server security tests.
+Security SQL: 10 passed in 19.49s (new uniquely named disposable database).
+Primary regression: 62 passed, 1 warning in 116.83s.
+Total across non-overlapping local suites: 137 tests + 29 subtests.
+JUnit: pytest.xml, security-sql.xml, primary-regression.xml.
+Warning 1: Starlette/httpx deprecation; all relevant checks still pass.
+Warning 2: test-owned backup retained, Windows filesystem access denied:
+C:\Program Files\Microsoft SQL Server\MSSQL17.MSSQLSERVER\MSSQL\Backup\QazCargo_Test_73db51caedb1.bak
+Only this synthetic test backup may be cleaned by the SQL Server administrator.
+
+Real HTTP: tools/check_lab8_http.py against isolated local API at 127.0.0.1:8020.
+10 checks passed. GET200, POST201, PUT200, DELETE204, bad JSON400,
+missing ID404, missing required fields422, missing client FK422.
+Response bodies: http-results.json. OpenAPI: openapi.json.
+Temporary server stopped after verification; main QazCargo database untouched.
+
+Actual SQLite faults: NULL injected into required cargo description during INSERT.
+POST409 rolls back the new order and cargo; next valid POST201 succeeds.
+PUT409 restores the original parent and all previous child records exactly.
+PRAGMA integrity_check = ok; foreign_key_check = no rows.
+
+Query-count measurement: tools/measure_lab_queries.py.
+3 orders: 16 -> 3 SELECTs; 30 orders: 70 -> 3 SELECTs.
+
+Bandit 1.9.4: lab runtime 7 LOW findings before -> 0 after verify_db hardening.
+Primary backend: 15 MEDIUM / LOW-confidence B608 + 5 LOW B101, reviewed in security-review.txt.
+
+CI before fix: run 44682189147, commit 8739acb, 3 failed / 62 passed.
+Two weak-password cases exposed a real defect; old OpenAPI assertion needed PUT.
+CI after fix: run 44682645025, commit c6f3fae, conclusion success.
+65 passed + 29 subtests in 6.33s; Bandit and actual Docker build passed.
+Container service DNS/HTTP, 10 HTTP matrix checks and volume recreation persistence passed.
+CI artifact 14604164791; ci-red.txt, ci-green.txt and github-actions-success.jpg preserve evidence.
+Actions runtime compatibility warning does not affect the passing conclusion.
+
+Locust 2.47.0: separate temporary SQLite, 200 synthetic orders, one Uvicorn worker.
+Four scenarios fully completed: 5 users/60s, 20/120s, 50/180s, 100/180s.
+Read-only traffic, wait 0.5–1.5 seconds; weights list/search/detail/catalogs = 3/2/1/1.
+Final files: load-final/summary.json, users-*_stats.csv, *_stats_history.csv,
+*_resources.json. Process-tree monitoring includes the Windows child interpreter.
+An earlier launcher-only resource sample was discarded and all scenarios repeated.
+All final runs: exit code 0 and zero failed requests.
+Environment and CPU/RAM meaning are recorded in summary.json.
+Locust and API shared this Windows host with other local work; no production SLA claim.
+
+{
+  "environment": {
+    "os": "Windows-11-10.0.26300-SP0",
+    "python": "3.14.8",
+    "logical_cpus": 8,
+    "ram_gb": 7.7,
+    "workers": 1,
+    "orders": 200,
+    "wait_s": [
+      0.5,
+      1.5
+    ],
+    "cpu_note": "Server process tree; 100% equals one logical CPU. Load generator shares host."
+  },
+  "results": [
+    {
+      "users": 5,
+      "duration_s": 60,
+      "requests": 286,
+      "failures": 0,
+      "avg_ms": 14.658186360835456,
+      "p95_ms": 26.0,
+      "p99_ms": 82.0,
+      "rps": 4.8874934341560134,
+      "exit_code": 0,
+      "cpu_avg_percent": 5.6245901639344265,
+      "cpu_max_percent": 12.5,
+      "rss_max_mb": 97.5703125
+    },
+    {
+      "users": 20,
+      "duration_s": 120,
+      "requests": 2344,
+      "failures": 0,
+      "avg_ms": 15.560365655779705,
+      "p95_ms": 28.0,
+      "p99_ms": 100.0,
+      "rps": 19.690459187294763,
+      "exit_code": 0,
+      "cpu_avg_percent": 19.910655737704918,
+      "cpu_max_percent": 37.5,
+      "rss_max_mb": 94.28125
+    },
+    {
+      "users": 50,
+      "duration_s": 180,
+      "requests": 8762,
+      "failures": 0,
+      "avg_ms": 19.761242764354957,
+      "p95_ms": 39.0,
+      "p99_ms": 89.0,
+      "rps": 49.13136638653058,
+      "exit_code": 0,
+      "cpu_avg_percent": 47.4510989010989,
+      "cpu_max_percent": 100.0,
+      "rss_max_mb": 101.36328125
+    },
+    {
+      "users": 100,
+      "duration_s": 180,
+      "requests": 16820,
+      "failures": 0,
+      "avg_ms": 60.36560618342565,
+      "p95_ms": 220.0,
+      "p99_ms": 560.0,
+      "rps": 94.24054155061013,
+      "exit_code": 0,
+      "cpu_avg_percent": 105.3521978021978,
+      "cpu_max_percent": 198.3,
+      "rss_max_mb": 110.53125
+    }
+  ]
+}
